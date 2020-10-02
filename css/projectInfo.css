@@ -1,0 +1,74 @@
+/* create project page */
+.mdl-layout-title{
+  margin-left:auto;
+}
+
+body{
+  background-image: url('background10.jpg');
+  background-size: cover;
+  color: white;
+}
+
+.mdl-textfield__input{
+  border-color: white;
+}
+
+#homeButton{
+  margin-left: -50px;
+}
+
+h4{
+  text-align: center;
+  font-family: monospace;
+}
+
+div.content{
+  margin-left: 50px;
+  margin-right: auto;
+  width: 36cm
+}
+
+#addGroup{
+  margin-top: 20px;
+  margin-left: 60px;
+  color: white;
+  position: fixed;
+  bottom: 10%;
+  width: 4cm;
+  right: 200px;
+  margin: 0;
+}
+
+/*old css*/
+/* create project page */
+/* .mdl-layout-title{
+  margin-left:480px;
+}
+
+#homeButton{
+  margin-left: -50px;
+}
+
+h3{
+  text-align: center;
+}
+
+div.content{
+  margin-left: 50px;
+  margin-right: auto;
+  width: 36cm
+}
+
+#addButton{
+  margin-top: 20px;
+  margin-left: 60px;
+  width: 1cm;
+}
+
+#addButton{
+  position: fixed;
+  bottom: 10%;
+  width: 6cm;
+  right: 200px;
+  margin: 0;
+} */

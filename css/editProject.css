@@ -1,0 +1,39 @@
+/* edit project page */
+body{
+  background-image: url('background10.jpg');
+  background-size: cover;
+  color: white;
+}
+
+#dueDate{
+  border-color: white;
+}
+
+.mdl-textfield__input{
+  border-color: white;
+}
+
+#homeButton{
+  margin-left: -50px;
+}
+
+#header{
+  color: white;
+}
+
+h4{
+  text-align: center;
+  font-family: monospace;
+}
+
+div.content{
+  margin-left: auto;
+  margin-right: auto;
+  width: 11.5cm
+}
+
+.mdl-button{
+  margin-top: 20px;
+  margin-left: 60px;
+  width: 3cm;
+}
