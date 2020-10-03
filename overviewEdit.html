@@ -59,27 +59,36 @@
                   <th>Tasks</th> <!-- fontsize is buggy -->
                   <th>Time Spent (Hours)</th>
                   <th>Completed</th>
+                  <th></th>
                 </tr>
                 <tr>
-                  <td><input type="text"></td>
-                  <td><input type="number"></td>
-                  <td><input type="checkbox"></td>
+                  <td><div contenteditable>Writing Script</div></td>
+                  <td><div contenteditable>24</div></td>
+                  <td><input type="checkbox" checked></td>
+                  <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
                 </tr>
                 <tr>
-                  <td><input type="text"></td>
-                  <td><input type="number"></td>
+                  <td><div contenteditable>Debugging</div></td>
+                  <td><div contenteditable>12321</div></td>
                   <td><input type="checkbox"></td>
+                  <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
+                </tr>
+                <tr>
+                  <td><div contenteditable>Having Fun</div></td>
+                  <td><div contenteditable>0</div></td>
+                  <td><input type="checkbox" checked></td>
+                  <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
                 </tr>
               </table>
             </div>
 
 <!-- Edit Buttons -->
-          <div class="mdl-cell mdl-cell--8-col">
+          <div class="mdl-cell mdl-cell--9-col">
             <h2>Total hours spent: 123456</h2> <!-- sums total hours(second column) -->
-            <div id="button">
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="nothing()">Edit Tasks</button> <!-- dont think this is necessary -->
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="addTask()">Add Task</button> <!-- not yet implemented -->
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="removeTask()">Remove Task</button>
+            <div id="button1">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="insertRow()">Add Task</button> <!-- not yet implemented -->
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="deleteRow()">Remove Task</button>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="save()">Save</button>
             </div>
           </div>
 
