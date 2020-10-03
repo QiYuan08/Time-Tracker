@@ -56,30 +56,26 @@
         <table id = "studentOverview" class="mdl-data-table mdl-js-data-table mdl-data-table--2dp">
           <tr>
             <td>Name</td>
-            <td>Role</td>
             <td>Time Spent</td>
             <td>Progress</td>
             <td>View / Edit</td>
           </tr>
           <tr>
-            <td>Amy</td> <!-- student's name from somewhere -->
-            <td>Carry</td> <!-- student's role from somewhere -->
-            <td>57 Hours</td> <!-- total time from overviewEdit -->
-            <td>100%</td> <!-- %tasks ticked from overviewEdit -->
+            <td><div contenteditable>Amy</div></td> <!-- student's name from somewhere -->
+            <td><div contenteditable>57 Hours</div></td> <!-- total time from overviewEdit -->
+            <td><div contenteditable>100%</div></td> <!-- %tasks ticked from overviewEdit -->
             <td><a href = "overviewEdit.html" target = "_self">Edit</a></td> <!-- or overviewView depending on user, view instead of edit-->
           </tr>
           <tr>
-            <td>Ben</td> <!-- loop for student2 -->
-            <td>Deadweight</td> <!-- repeat for all students -->
-            <td>27 Hours</td>
-            <td>1%</td>
+            <td><div contenteditable>Ben</div></td> <!-- loop for student2 -->
+            <td><div contenteditable>27 Hours</div></td>
+            <td><div contenteditable>1%</div></td>
             <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
           </tr>
           <tr>
-            <td>Chris</td> <!-- loop for student2 -->
-            <td>ScrumMaster</td> <!-- repeat for all students -->
-            <td>1 Hours</td>
-            <td>69%</td>
+            <td><div contenteditable>Chris</div></td> <!-- loop for student2 -->
+            <td><div contenteditable>1 Hours</div></td>
+            <td><div contenteditable>69%</div></td>
             <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
           </tr>
         </table>
@@ -89,9 +85,9 @@
             <div class="mdl-cell mdl-cell--9-col">
               <div id="button1">
                 <br>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="nothing()">Edit Tasks</button> <!-- dont think this is necessary -->
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="addTask()">Add Task</button> <!-- not yet implemented -->
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="removeTask()">Remove Task</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="insertRow()">Add Student</button> <!-- not yet implemented -->
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="deleteRow()">Remove Student</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="save()">Edit Student(save?)</button>
               </div>
             </div>
 
