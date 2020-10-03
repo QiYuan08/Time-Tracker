@@ -8,13 +8,10 @@ body{
   background-size: cover;
 }
 
-#header{
-  color: white;
-}
-
 h2{
-  text-align: center;
+  color: white;
   font-family: monospace;
+  text-align: center;
 }
 
 div.content{
