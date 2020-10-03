@@ -23,7 +23,7 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" id="logout" href="">Log out</a>
+        <a class="mdl-navigation__link" id="logout" href="script/logout.php">Log out</a>
       </nav>
       <div class="mdl-tooltip" data-mdl-for="logout">
         Log out
@@ -36,7 +36,7 @@
     //extracting the data from SQLDatabase
     $sql = "SELECT * FROM project WHERE ProjectID='$ProjectId'";
     $result = mysqli_query($db, $sql);
-    $resultCheck = mysqli_num_rows($result);
+    
     $row = mysqli_fetch_assoc($result);  // fetch array that consist of data of current row
     $ProjectName = $row["Name"];
     $ProjectCode = $row["unitCode"];
@@ -114,16 +114,16 @@
                 <div class="mdl-tooltip" data-mdl-for="addGroup">
                 Add new group
                 </div>
-            </form>
+                </form>
         <?php
         if(isset($_POST["addGroup"])){
            header("Location: ../addGroup.php?select=".$ProjectId);
         }
         ?>
         <!-- Contact Chip -->
+        <form action="script/teamInfoTeacherDis.php" method="get">
         <?php
         require 'script/config.php';
-
         $sql = "SELECT * FROM teamlist WHERE ProjectID='$ProjectId'";
         $projects = mysqli_query($db, $sql);
         $output = ' ';
@@ -131,10 +131,10 @@
         while($row = $projects->fetch_assoc()) {
             $num += 1;
             $output .= '<span class="mdl-chip mdl-chip--contact">';
-            $output .= '<span class="mdl-chip__contact mdl-color--teal mdl-color-text--white" onclick = "window.location.href="overview.html">';
+            $output .= "<button class='mdl-chip__contact mdl-color--teal mdl-color-text--white' value={$row['TeamID']} type='submit' name='teamInfo'>";
             $output .= $num;
-            $output .=  "</span>";
-            $output .= '<span class="mdl-chip__text" id="view" onclick = "window.location.href="overview.html"">';
+            $output .=  "</button>";
+            $output .= "<span class='mdl-chip__text' value={$row['TeamID']} type='submit' name='teamInfo' >";
             $output .= $row["TeamName"];
             $output .= '</span>';
             $output .= "</span>";
@@ -142,6 +142,8 @@
         }
         echo $output;
         ?>
+        </form> 
+        
        </div>
     </div>
 </div>
