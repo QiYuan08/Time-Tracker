@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_POST["create"])){
   // connect to db
   require 'config.php';
@@ -15,7 +16,8 @@ if(isset($_POST["create"])){
     //sends the user to the page identified in the header in the html and ensures that the user doesn't need to fill the fields that were filled before
     exit(); //exits the code when the user doesn't fill out all the inputs
   } else {
-    $sql = "INSERT INTO project (ProjectID, Name, unitCode, StartDate, EndDate, Summary) VALUES ('','$ProjectName','$UnitCode','$StartDate','$DueDate', '$ProjectDesc')";
+    $teacherId = $_SESSION['id'];
+    $sql = "INSERT INTO project (ProjectID, Name, MonashID, unitCode, StartDate, EndDate, Summary) VALUES ('','$ProjectName','$teacherId', '$UnitCode','$StartDate','$DueDate', '$ProjectDesc')";
     mysqli_query($db, $sql);
     header("Location: ../home.php"); //ends the process for creating a new project
     exit(); //exits the code

@@ -88,17 +88,11 @@
                     $output .= "<button class='material-icons' name='delete' id='delete' type='submit' value={$row['MonashID']}>delete</button>";
                     $output .= '<br>';                
                 }
-            } 
+            }  
             echo $output;
             ?>
-            </form>
-            <!--code for deleting member --> 
-           <?php if(isset($_POST['delete'])){
-               echo $_POST['delete'];
-               $MonashId = $_POST['delete']; 
-               $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId' ";
-               $result5= mysqli_query($db, $sql5);
-           }?>
+ 
+           
           </h1>
         </div>
       </div>
@@ -136,7 +130,6 @@
 <!-- Edit Buttons -->
             <div class="mdl-cell mdl-cell--9-col">
               <div id="button1">
-              <form action ='' method='post'>
                 <br>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name='addStudent' >Add Student</button> 
               </div>
@@ -145,8 +138,15 @@
             <!-- code for adding a student-->
             <?php 
             if(isset($_POST['addStudent'])){
-                
-            }
+                header("Location: ../addStudent.php?teamID=".$_GET['teamID']);
+                exit();
+            }else if(isset($_POST['delete'])){
+               $MonashId = $_POST['delete']; 
+               $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId'";
+               $result5= mysqli_query($db, $sql5);
+               header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
+               exit();
+            }?>
             ?>
         </div>
       </div>
