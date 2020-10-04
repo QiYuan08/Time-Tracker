@@ -1,10 +1,14 @@
+<?php
+  require 'script/overview_script.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Overview | Student</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css" />
-  <link rel="stylesheet" href="css/overview.css"> <!-- styles/overview.css -->
+  <link rel="stylesheet" href="overview.css"> <!-- styles/overview.css -->
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
@@ -27,8 +31,8 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="overview.html">Overview</a>
-        <a class="mdl-navigation__link" href="visualisation.html">Visualisation</a>
+        <a class="mdl-navigation__link" href="overview.php">Overview</a>
+        <a class="mdl-navigation__link" href="visualisation.php">Visualisation</a>
         <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
       </nav>
     </div>
@@ -39,16 +43,9 @@
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--2-col"></div>
           <div class="mdl-cell mdl-cell--8-col">
-            <div id="studentSort">
-              <h1>Project Name : FIT2101 Assignment 1 <!-- insert reference -->
-              <br>Teacher In Charge : Dr.Ema
-              <br>Start Date : 1-Sep-2020
-              <br>Due Date : 10-Sep-2020
-              <br>
-              <br>Team Name : Best Team
-              <br>Team Members : Amy, Ben, Chris
-              </h1>
-            </div>
+          <?php
+            echo $projectInfo
+          ?>
           </div>
 
 <!-- Team Info -->
@@ -56,32 +53,13 @@
             <table id = "studentOverview" class="mdl-data-table mdl-js-data-table mdl-data-table--2dp">
               <tr>
                 <td>Name</td>
-                <td>Role</td>
                 <td>Time Spent</td>
-                <td>Progress</td>
+                <!-- <td>Progress</td> remove for now cuz dono how to calculate yet -->
                 <td>View / Edit</td>
               </tr>
-              <tr>
-                <td>Amy</td> <!-- student's name from somewhere -->
-                <td>Carry</td> <!-- student's role from somewhere -->
-                <td>57 Hours</td> <!-- total time from overviewEdit -->
-                <td>100%</td> <!-- %tasks ticked from overviewEdit -->
-                <td><a href = "overviewEdit.html" target = "_self">Edit</a></td> <!-- or overviewView depending on user, view instead of edit-->
-              </tr>
-              <tr>
-                <td>Ben</td> <!-- loop for student2 -->
-                <td>Deadweight</td> <!-- repeat for all students -->
-                <td>27 Hours</td>
-                <td>1%</td>
-                <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
-              </tr>
-              <tr>
-                <td>Chris</td> <!-- loop for student2 -->
-                <td>ScrumMaster</td> <!-- repeat for all students -->
-                <td>1 Hours</td>
-                <td>69%</td>
-                <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
-              </tr>
+              <?php
+                echo $teamInfo;
+              ?>
             </table>
           </div>
 

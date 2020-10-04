@@ -1,10 +1,14 @@
+<?php
+  require 'script/overviewView_script.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Overview-View | Student</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css" />
-  <link rel="stylesheet" href="css/overview.css"> <!-- styles/overview.css -->
+  <link rel="stylesheet" href="css/overview.css">  <!-- styles/overview.css -->
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
@@ -18,17 +22,17 @@
         <span class="mdl-layout-title">Monash Time Tracker</span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Log out</a>
+          <a class="mdl-navigation__link" href="script/logout.php">Log out</a>
         </nav>
       </div>
     </header>
 
 <!-- Navigation drawer -->
-    <div class="mdl-layout__drawer">
+<div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="overview.html">Overview</a>
-        <a class="mdl-navigation__link" href="visualisation.html">Visualisation</a>
+        <a class="mdl-navigation__link" href="overview.php">Overview</a>
+        <a class="mdl-navigation__link" href="visualisation.php">Visualisation</a>
         <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
       </nav>
     </div>
@@ -39,48 +43,31 @@
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--2-col"></div>
           <div class="mdl-cell mdl-cell--8-col">
-            <div id="studentSort">
-              <h1>Project Name : FIT2101 Assignment 1 <!-- insert reference -->
-              <br>Teacher In Charge : Dr.Ema
-              <br>Start Date : 1-Sep-2020
-              <br>Due Date : 10-Sep-2020
-              <br>
-              <br>Team Name : Best Team
-              <br>Team Members : Amy, Ben, Chris
-              </h1>
-            </div>
+          <?php
+              echo $projectInfo;
+            ?>
           </div>
 
 <!-- TeamMember Info -->
             <div id = outputArea>
               <table id = "studentOverview" class="mdl-data-table mdl-js-data-table mdl-data-table--2dp">
-                <caption>Amy's Tasks (view Only)</caption>
+                <?php
+                  echo $caption;
+                ?>
                 <tr>
                   <th>Tasks</th> <!-- fontsize is buggy -->
                   <th>Time Spent (Hours)</th>
                   <th>Completed</th>
                 </tr>
-                <tr>
-                  <td><input type="text" disabled="disabled">Writing Script</td>
-                  <td><input type="number" disabled="disabled">24</td>
-                  <td><input type="checkbox" disabled="disabled" checked="checked"></td>
-                </tr>
-                <tr>
-                  <td><input type="text" disabled="disabled">Debugging</td>
-                  <td><input type="number" disabled="disabled">12321</td>
-                  <td><input type="checkbox" ></td>
-                </tr>
-                <tr>
-                  <td><input type="text" disabled="disabled">Having Fun</td>
-                  <td><input type="number" disabled="disabled">0</td>
-                  <td><input type="checkbox" disabled="disabled" checked="checked"></td>c
-                </tr>
+                <?php
+                echo $taskInfo;
+              ?>
               </table>
             </div>
 
 <!-- Time Spent -->
           <div class="mdl-cell mdl-cell--8-col">
-            <h2>Total hours spent: 123456</h2> <!-- sums total hours(second column) -->
+            <h2> Total hour spent: <?php echo $totalHour ?> </h2> <!-- sums total hours(second column) -->
           </div>
 
         </div>

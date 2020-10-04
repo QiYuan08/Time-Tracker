@@ -16,20 +16,25 @@ if (isset($_POST['loginBtn'])) {
     } else { # check wif db for username and password
         
         # query db for infor user inputted
-        $sql = "SELECT * FROM user WHERE username='$username' AND pwdUser='$password'";
+        $sql = "SELECT * FROM user WHERE Username='$username' AND Password='$password'";
         $result = mysqli_query($db, $sql);
         $resultCheck = mysqli_num_rows($result);
+        $row = mysqli_fetch_assoc($result);  // fetch array that consist of data of current row
 
         if ($resultCheck > 0) {  # if user found
             # start the session
             session_start();
-            $_SESSION['name'] = $username;
+            $_SESSION['username'] = $username;
             $_SESSION['id'] = $row['MonashId'];
+            $_SESSION['type'] = $row['type'];
+            $_SESSION['name'] = $row['Fullname'];
             
-            header("Location: ../homepage.html");
+            # redirect user to homepage
+            header("Location: ../home.php");
             exit();
 
-        } else {  # if user not found
+
+        } else {  # if user not found 
             header("Location: ../index.php?error=userNull");
             exit();
 

@@ -27,17 +27,14 @@
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   	<header class="mdl-layout__header">
   	    <div class="mdl-layout__header-row">
-        <!-- Title -->
+        <!-- Ttile -->
   	        <span class="mdl-layout-title" >Home</span>
         <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
         <!-- Navigation -->
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" id="logout" href="script/logout.php">Log out</a>
+            <a class="mdl-navigation__link" href="script/logout.php">Log out</a>
         </nav>
-        <div class="mdl-tooltip" data-mdl-for="logout">
-        Log out
-        </div>
   	    </div>
   	</header>
 
@@ -48,9 +45,9 @@
             <br>
             <?php
             if ($_SESSION['type'] == "Teacher"){
-                echo '<h2>Choose project to edit / view </h2>';
+                echo '<h3>Choose project to edit / view </h3>';
             } else if ($_SESSION['type'] == "Student"){
-                echo '<h2>Choose project to view</h2>';
+                echo '<h3>Choose project to view</h3>';
             }
             ?>
             
@@ -61,8 +58,8 @@
                 <div class="mdl-grid" id="lockerDisplay">
                     <?php
                     require 'script/config.php';
-                    $teacherId = $_SESSION['id'];
-                    $sql = "SELECT * FROM project where MonashID='$teacherId'";
+
+                    $sql = "SELECT * FROM project";
                     $projects = mysqli_query($db, $sql);
                     $output = ' ';
                     while($row = $projects->fetch_assoc()) {

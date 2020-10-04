@@ -33,11 +33,12 @@ while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried fr
                     <td><div contenteditable>' . $row['TimeSpent'] .'</td>
                     <td><input type="checkbox" checked></td>
                     <form action="script/deleteRow.php?tId='. $row['TaskID'] .'&name='. $name .'" method="post">  
-                        <td><button name="deleteBtn" class="mdl-navigation__link">Delete</button></td>
+                        <td><button name="deleteBtn" class="mdl-navigation__link">Delete Task</button></td>
                     </form>
                   </tr>';
     
     $totalHour += $row['TimeSpent'];
 }
+
 
 

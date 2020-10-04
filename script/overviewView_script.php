@@ -6,8 +6,9 @@
     of a user in the overview page
 */
 require 'config.php'; # connect to db
-require 'getProjectInfo.php'; # retrive and get project info
+require 'getProjectInfo.php'; # get the info of project
 
+$projectId = $_SESSION['ProjectID'];
 $taskInfo = "";    # string to echo taskInfo table
 $name = $_GET['name'];
 $id = $_GET['uid'];
@@ -21,7 +22,6 @@ $keepeye = "";
 # get task for this student in this team
 $sql = "SELECT * FROM task WHERE teamID='$teamId' AND ProjectID='$projectId' AND MonashID='$id'";
 $result = mysqli_query($db, $sql);
-
 
 # if this student has not done anything
 if (mysqli_num_rows($result) == 0){
