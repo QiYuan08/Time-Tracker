@@ -53,7 +53,7 @@
 
 <!-- TeamMember Info -->
             <div id = outputArea>
-              <table id = "studentOverview" class="mdl-data-table mdl-js-data-table mdl-data-table--2dp">
+              <table id = "studentOverview" class="mdl-data-table mdl-js-data-table mdl-data-table--2dp" contenteditable="true">
                 <caption>Your Tasks</caption> <!-- or user's name -->
                 <tr>
                   <th>Tasks</th> <!-- fontsize is buggy -->
@@ -62,7 +62,7 @@
                   <th></th>
                 </tr>
                 <tr>
-                  <td><div contenteditable>Writing Script</div></td>
+                  <td><div>Writing Script</div></td>
                   <td><div contenteditable>24</div></td>
                   <td><input type="checkbox" checked></td>
                   <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
@@ -79,6 +79,25 @@
                   <td><input type="checkbox" checked></td>
                   <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
                 </tr>
+<!-- Hidden Rows -->
+                <tr style="display:none;">
+                  <td><div contenteditable></div></td>
+                  <td><div contenteditable></div></td>
+                  <td><input type="checkbox"d></td>
+                  <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
+                </tr>
+                <tr style="display:none;">
+                  <td><div contenteditable></div></td>
+                  <td><div contenteditable></div></td>
+                  <td><input type="checkbox"d></td>
+                  <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
+                </tr>
+                <tr style="display:none;">
+                  <td><div contenteditable></div></td>
+                  <td><div contenteditable></div></td>
+                  <td><input type="checkbox"d></td>
+                  <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
+                </tr>
               </table>
             </div>
 
@@ -88,7 +107,7 @@
             <div id="button1">
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="insertRow()">Add Task</button> <!-- not yet implemented -->
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="deleteRow()">Remove Task</button>
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="save()">Save</button>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="document.location='overviewEdit.html'">Save</button>
             </div>
           </div>
 
