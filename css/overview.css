@@ -7,18 +7,26 @@ span{
 }
 
 body{
+  background-image: url('img/background10.jpg');
+  background-size: cover;
   background-color: #CEE9FB;
   line-height: 25px;
 }
 
+caption{
+  color: white;
+}
+
 h1{
   text-align: left;
-  font-size: 20px
+  font-size: 20px;
+  color: white
 }
 
 h2{
   text-align: right;
-  font-size: 20px
+  font-size: 20px;
+  color: white
 }
 
 h3{
