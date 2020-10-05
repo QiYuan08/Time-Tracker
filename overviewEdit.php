@@ -22,17 +22,20 @@
         <span class="mdl-layout-title">Monash Time Tracker</span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="overview.php">Return to Overview</a>
+        <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="script/logout.php">Log out</a>
         </nav>
       </div>
     </header>
 
 <!-- Navigation drawer -->
-<div class="mdl-layout__drawer">
+    <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="home.php">Home</a>
         <a class="mdl-navigation__link" href="overview.php">Overview</a>
-        <a class="mdl-navigation__link" href="visualisation.php">Visualisation</a>
+        <a class="mdl-navigation__link" href="visualisation.html">Visualisation</a>
         <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
       </nav>
     </div>
@@ -51,9 +54,7 @@
 <!-- TeamMember Info -->
             <div id = outputArea>
               <table id = "studentOverview" class="mdl-data-table mdl-js-data-table mdl-data-table--2dp">
-                <?php
-                  echo $caption;
-                ?>
+                <caption>Your Tasks</caption> <!-- or user's name -->
                 <tr>
                   <th>Tasks</th> <!-- fontsize is buggy -->
                   <th>Time Spent (Hours)</th>
@@ -72,7 +73,9 @@
           <div class="mdl-cell mdl-cell--9-col">
             <h2>Total hours spent: <?php echo $totalHour; ?> </h2> <!-- sums total hours(second column) -->
             <div id="button1">
-              <button><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" href="#popup1">Add Task</a></button>                        
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="insertRow()">Add Task</button> <!-- not yet implemented -->
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="deleteRow()">Remove Task</button>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="save()">Save</button>
             </div>
           </div>
 
@@ -80,39 +83,6 @@
       </div>
     </main>
   </div>
-
-  <!-- popup Modal -->
-  <div id="popup1" class="overlay">
-    <div class="popup">
-      <h2 style="text-align:center">Input your task here</h2>
-      <a class="close" href="#">&times;</a>
-      <div class="content">
-      
-      <form action="script/addTask.php" method="post">
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input name="task" class="mdl-textfield__input" type="text" id="sample3">
-            <label class="mdl-textfield__label" for="">task</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input name="timespent" class="mdl-textfield__input" type="number" id="sample3" min="0">
-            <label class="mdl-textfield__label" for="">Time Spend</label>
-          </div>
-          <br>
-          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-            <input name="isComplete" type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
-            <span class="mdl-checkbox__label">Completed</span>
-          </label>
-          <br>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name="save">Save</button>
-        </form>
-
-      
-      </div>
-    </div>
-  </div>
-
-  <div id="test"></div>
-
   <!-- <script src="scripts/shared.js" charset="utf-8"></script> -->
   <script src="scripts/overview.js"></script>
 </body>
