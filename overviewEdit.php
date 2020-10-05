@@ -72,7 +72,7 @@
           <div class="mdl-cell mdl-cell--9-col">
             <h2>Total hours spent: <?php echo $totalHour; ?> </h2> <!-- sums total hours(second column) -->
             <div id="button1">
-              <button><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" href="#popup1">Add Task</a></button>             
+              <button><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" href="#popup1">Add Task</a></button>                        
             </div>
           </div>
 
