@@ -8,7 +8,7 @@
   <title>Overview-View | Student</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css" />
-  <link rel="stylesheet" href="css/overview.css">  <!-- styles/overview.css -->
+  <link rel="stylesheet" href="css/overview.css"> <!-- styles/overview.css -->
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
@@ -22,21 +22,27 @@
         <span class="mdl-layout-title">Monash Time Tracker</span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="overview.php">Return to Overview</a>
+        <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="script/logout.php">Log out</a>
         </nav>
       </div>
     </header>
 
 <!-- Navigation drawer -->
-<div class="mdl-layout__drawer">
+    <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="home.php">Home</a>
         <a class="mdl-navigation__link" href="overview.php">Overview</a>
-        <a class="mdl-navigation__link" href="visualisation.php">Visualisation</a>
+        <a class="mdl-navigation__link" href="visualisation.html">Visualisation</a>
         <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
       </nav>
     </div>
 
+    <?php
+              echo $keepeye;
+    ?>
 <!-- Project Info -->
     <main class="mdl-layout__content">
       <div class="page-content">
