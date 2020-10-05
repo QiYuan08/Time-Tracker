@@ -14,13 +14,13 @@ if(isset($_POST['isComplete'])){
 }
 
 $keepeye .="overview: ". $isComplete .",";
-$sql = "INSERT INTO task (TaskID, MonashId, TeamID, ProjectID, TimeSpent, Comment, isComplete) VALUES ('','$monashId','$teamId','$projectId','$timeSpent','$comment', '$isComplete')";
+$sql = "INSERT INTO task (TaskID, MonashId, TeamID, ProjectID, TimeSpent, taskTitle, isComplete) VALUES ('','$monashId','$teamId','$projectId','$timeSpent','$comment', '$isComplete')";
 $result = mysqli_query($db, $sql);
 
 if ($result == false){
     header("Location: ../overviewEdit.php?name=".$name."&errno=f"); # add fail
 } else{
-    header("Location: ../overviewEdit.php?name=".$name."&O=".$isComplete."&errno=t"); # add successfull
+    header("Location: ../overviewEdit.php?name=".$name. "&errno=t"); # add successfull
 }
 
 

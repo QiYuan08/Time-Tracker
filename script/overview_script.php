@@ -32,6 +32,8 @@ $teamId = $member_row['TeamID'];
 $sql = "SELECT * FROM teamlist WHERE TeamID='$teamId' AND ProjectID='$projectId'";
 $result = mysqli_query($db, $sql);
 $team_row = mysqli_fetch_assoc($result);
+$keepeye .= $teamId . "; ";
+$keepeye .= $projectId . ", ";
 
 # displaying project info
 # there should be already be a project for user to enter here

@@ -40,6 +40,9 @@
       </nav>
     </div>
 
+    <!-- <?php
+            echo '<h2>'. $keepeye . '</h2>';
+          ?> -->
 <!-- Project Info -->
     <main class="mdl-layout__content">
       <div class="page-content">
@@ -73,9 +76,7 @@
           <div class="mdl-cell mdl-cell--9-col">
             <h2>Total hours spent: <?php echo $totalHour; ?> </h2> <!-- sums total hours(second column) -->
             <div id="button1">
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="insertRow()">Add Task</button> <!-- not yet implemented -->
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="deleteRow()">Remove Task</button>
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="save()">Save</button>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" href="#popup1">Add Task</a>                        
             </div>
           </div>
 
