@@ -34,6 +34,17 @@
     <div id = "header">
       <h3>Add new student</h3>
     </div>
+    <?php
+    if(isset($_GET['error'])){
+        if($_GET['error'] == "emptyfields"){
+            echo "<p align='center'> Fill in all fields! </p>";
+        } elseif($_GET['error'] == "notFound"){
+            echo "<p align='center'> Student not found in the system! </p>";
+        } elseif($_GET['error'] == "exists"){
+            echo "<label align='center'> Student is already in a system! </label>";
+        }
+    }
+    ?>
     <form action=" " method="post">
     <div class = "content">
       <div>
@@ -95,7 +106,7 @@
             $result5 = mysqli_query($db, $sql5);
             $studentInfo = mysqli_fetch_assoc($result5);
             $studentName = $studentInfo['FullName'];
-            $sql6 = "INSERT INTO `teammembers`(MemID, TeamID, MonashID, Name) VALUES (' ','$teamID','$studentId','$studentName')";
+            $sql6 = "INSERT INTO `teammembers`(MemID, ProjectID, TeamID, MonashID, Name) VALUES (' ', '$ProjectID', '$teamID','$studentId','$studentName')";
             $result6 = mysqli_query($db, $sql6);
             header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
             exit();

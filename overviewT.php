@@ -18,7 +18,7 @@
         <span class="mdl-layout-title">Monash Time Tracker</span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Log out</a>
+          <a class="mdl-navigation__link" href="script/logout.php">Log out</a>
         </nav>
       </div>
     </header>
@@ -42,6 +42,8 @@
             <div id="studentSort">
               <!--getting the project information-->
               <?php
+              session_start();
+
               $teamId = $_GET['teamID'];
               //extracting data from the database
               require 'script/config.php';
@@ -100,16 +102,8 @@
                   }
                   echo $output;
                   ?>
-                </form>
-                <!--code for deleting member -->
-                <?php
-                if(isset($_POST['delete'])){
-                  $MonashId = $_POST['delete'];
-                  $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId' ";
-                  $result5= mysqli_query($db, $sql5);
-                  header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
-                  exit();
-                }?>
+                
+                
               </h1>
             </div>
           </div>
@@ -119,16 +113,11 @@
 
             <div id = 'outputArea'>
               <?php
-              session_start();
-
-              require 'script/config.php';
-              require 'script/teamInfoTeacherDis.php';
+              
 
               //known variables
               $current_Monashid = $_SESSION['id'];
               $current_TeamID = $_GET['teamID'];
-              echo $current_Monashid . "<br>";
-              echo $current_TeamID . "<br>";
 
               if (empty($current_Monashid) || empty($current_TeamID)) {
                 exit('Key user data is empty. <br>Do NOT resubmit form data. The site requires data you entered earlier in order to be properly displayed.');
@@ -139,7 +128,6 @@
               $obj_ProjectID = mysqli_query($db, $sql_ProjectID);
               $current_ProjectID_fetch = mysqli_fetch_assoc($obj_ProjectID);
               $current_ProjectID = $current_ProjectID_fetch['ProjectID'];
-              echo $current_ProjectID;
 
               $sql_allTasks = "SELECT * FROM task WHERE ProjectID='$current_ProjectID' AND TeamID='$current_TeamID'";
               $obj_allTasks = mysqli_query($db, $sql_allTasks);
@@ -182,7 +170,6 @@
           <!-- Edit Buttons -->
           <div class="mdl-cell mdl-cell--9-col">
             <div id="button1">
-              <form action ='' method='post'>
                 <br>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name='addStudent' >Add Student</button>
               </div>
@@ -190,15 +177,22 @@
           </div>
           <!-- code for adding a student-->
           <?php
-          if(isset($_POST['addStudent'])){
-            header("Location: ../addStudent.php?teamID=".$_GET['teamID']);
-          }
-          ?>
+            if(isset($_POST['addStudent'])){
+                header("Location: ../addStudent.php?teamID=".$_GET['teamID']);
+                exit();
+            }elseif(isset($_POST['delete'])){
+               $MonashId = $_POST['delete']; 
+               $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId'";
+               $result5= mysqli_query($db, $sql5);
+               header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
+               exit();
+            }
+            ?>
+          
         </div>
       </div>
     </main>
   </div>
-  <!-- <script src="scripts/shared.js" charset="utf-8"></script> -->
-  <script src="scripts/overview.js"></script>
+
 </body>
 </html>
