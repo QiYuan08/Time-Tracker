@@ -27,7 +27,8 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="overview.html">Overview</a>
+        <a class="mdl-navigation__link" href="home.php">Home</a>
+        <a class="mdl-navigation__link" href="overview.php">Overview</a>
         <a class="mdl-navigation__link" href="visualisation.html">Visualisation</a>
         <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
       </nav>
@@ -40,10 +41,10 @@
       <div class="mdl-cell mdl-cell--2-col"></div>
       <div class="mdl-cell mdl-cell--8-col">
         <div id="studentSort">
-        <!--getting the project information--> 
+        <!--getting the project information-->
         <?php
         $teamId = $_GET['teamID'];
-        //extracting data from the database 
+        //extracting data from the database
         require 'script/config.php';
         $sql = "SELECT * FROM teamlist WHERE TeamID='$teamId'";
         $result = mysqli_query($db, $sql);
@@ -67,7 +68,7 @@
           <br>Due Date: <?php echo $projectInfo['EndDate']; ?>
           <br>
           <br>Team Name: <?php echo $teamInfo['TeamName']; ?>
-          <br>Team Members: 
+          <br>Team Members:
           <form action="" method="post">
           <?php
             $sql4 = "SELECT * FROM teammembers WHERE TeamID='$teamId' ";
@@ -86,67 +87,53 @@
                     $output .= '</span>';
                     $output .= "</span>";
                     $output .= "<button class='material-icons' name='delete' id='delete' type='submit' value={$row['MonashID']}>delete</button>";
-                    $output .= '<br>';                
+                    $output .= '<br>';
                 }
-            }  
+            } 
+            // $output .= "<button class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored' name='delete' id='delete' type='submit' value={$row['MonashID']}>delete</button>";
             echo $output;
             ?>
- 
-           
+            </form>
+            <!--code for deleting member -->
+           <?php
+           if(isset($_POST['delete'])){
+               $MonashId = $_POST['delete'];
+               $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId' ";
+               $result5= mysqli_query($db, $sql5);
+               header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
+               exit();
+            }?>
           </h1>
         </div>
       </div>
 
 <!-- Team Info -->
       <div id = 'outputArea'>
-        <table id = "studentOverview" class="mdl-data-table mdl-js-data-table mdl-data-table--2dp">
-          <tr>
-            <td>Name</td>
-            <td>Time Spent</td>
-            <td>Progress</td>
-            <td>Edit</td>
-          </tr>
-          <tr>
-            <td><div contenteditable>Amy</div></td> <!-- student's name from somewhere -->
-            <td><div contenteditable>57 Hours</div></td> <!-- total time from overviewEdit -->
-            <td><div contenteditable>100%</div></td> <!-- %tasks ticked from overviewEdit -->
-            <td><a href = "overviewEdit.html" target = "_self">Edit</a></td> <!-- or overviewView depending on user, view instead of edit-->
-          </tr>
-          <tr>
-            <td><div contenteditable>Ben</div></td> <!-- loop for student2 -->
-            <td><div contenteditable>27 Hours</div></td>
-            <td><div contenteditable>1%</div></td>
-            <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
-          </tr>
-          <tr>
-            <td><div contenteditable>Chris</div></td> <!-- loop for student2 -->
-            <td><div contenteditable>1 Hours</div></td>
-            <td><div contenteditable>69%</div></td>
-            <td><a href = "overviewEdit.html" target = "_self">Edit</a></td>
-          </tr>
-        </table>
+        <?php
+          require 'script/taskDisTeacherSide.php';
+          echo $current_ProjectID;
+          echo $current_TeamID;
+          echo $sql_allTasks;
+          echo $obj_allTasks;
+          echo $obj_allTasks_rows;
+          // echo $TaskName_from_task;
+        ?>
       </div>
 
 <!-- Edit Buttons -->
             <div class="mdl-cell mdl-cell--9-col">
               <div id="button1">
+              <form action ='' method='post'>
                 <br>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name='addStudent' >Add Student</button> 
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name='addStudent' >Add Student</button>
               </div>
               </form>
             </div>
             <!-- code for adding a student-->
-            <?php 
+            <?php
             if(isset($_POST['addStudent'])){
                 header("Location: ../addStudent.php?teamID=".$_GET['teamID']);
-                exit();
-            }else if(isset($_POST['delete'])){
-               $MonashId = $_POST['delete']; 
-               $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId'";
-               $result5= mysqli_query($db, $sql5);
-               header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
-               exit();
-            }?>
+            }
             ?>
         </div>
       </div>
