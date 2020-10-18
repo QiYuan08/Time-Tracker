@@ -1,0 +1,35 @@
+/* create project page */
+.mdl-layout-title{
+  margin-left:auto;
+}
+
+body{
+  background-image: url('img/background10.jpg');
+  background-size: cover;
+  color: white;
+  font-size: 20px;
+}
+
+span{
+  color: white;
+}
+
+p{
+  font-style: italic;
+}
+
+h3{
+  text-align: center;
+  font-family: monospace;
+}
+
+div.content{
+  margin-left: 50px;
+  margin-right: auto;
+  width: 36cm
+}
+
+#submit{
+  color: white;
+
+}
