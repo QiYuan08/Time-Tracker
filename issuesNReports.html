@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,3 +79,93 @@
   <script src="scripts/overview.js"></script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Issues and reports</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="css/issues.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+
+  <body>
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  	<header class="mdl-layout__header">
+  	<div class="mdl-layout__header-row">
+      <!-- Title -->
+  	<span class="mdl-layout-title" > Issues and report </span>
+    <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="" id = "logout">Log out</a>
+      </nav>
+      <div class="mdl-tooltip" data-mdl-for="logout">
+      Log out
+      </div>
+  	</div>
+  	</header>
+
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Navigation Menu</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="home.php">Home</a>
+        <a class="mdl-navigation__link" href="overview.php">Overview</a>
+        <a class="mdl-navigation__link" href="visualisation.html">Visualisation</a>
+        <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
+      </nav>
+    </div>
+
+   <div id = content>
+    <div class = "row">
+      <div class = "column">
+        <div class = "card">
+          <h3>Team issue</h3>
+          <p>raised by Amy</p>
+          <!-- Primary-colored flat button -->
+          <button class="mdl-button mdl-js-button mdl-button--primary" onclick = "window.location.href='issueDescription.html'">
+          View
+          </button>
+        </div>
+      </div>
+
+      <div class = "column">
+        <div class = "card">
+          <h3>Database issue</h3>
+          <p>raised by Robert</p>
+          <!-- Primary-colored flat button -->
+          <button class="mdl-button mdl-js-button mdl-button--primary" onclick = "window.location.href='issueDescription.html'">
+          View
+          </button>
+        </div>
+      </div>
+
+      <div class = "column">
+        <div class = "card">
+          <h3>Confusion</h3>
+          <p>raised by Ma</p>
+          <!-- Primary-colored flat button -->
+          <button class="mdl-button mdl-js-button mdl-button--primary" onclick = "window.location.href='issueDescription.html'">
+          View
+          </button>
+        </div>
+      <!-- </div> -->
+    </div>
+    <!-- Accent-colored raised button -->
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="report" onclick = "window.location.href='addIssue.html'">
+      Report an issue
+    </button>
+    <div class="mdl-tooltip" data-mdl-for="report">
+    Report an issue
+    </div>
+    </div>
+  </div>
+  </div>
+  </body>
+</html>
+>>>>>>> Stashed changes
