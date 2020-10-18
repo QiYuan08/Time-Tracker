@@ -27,7 +27,8 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="overview.html">Overview</a>
+      <a class="mdl-navigation__link" href="home.php">Home</a>
+        <a class="mdl-navigation__link" href="overview.php">Overview</a>
         <a class="mdl-navigation__link" href="visualisation.html">Visualisation</a>
         <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
       </nav>

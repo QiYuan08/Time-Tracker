@@ -84,16 +84,16 @@ for ($i=0; $i < count($teamMembers); $i++){
     $result = mysqli_query($db, $sql);
     $row = mysqli_fetch_assoc($result);
     $teamInfo .= '<tr>
-                    <td>' . $row['Fullname']  . '</td> 
+                    <td>' . $row['FullName']  . '</td> 
                     <td>' . $totalHour .'</td>';
     
-    if ($_SESSION['name'] == $row['Fullname']){ # if current student is user
+    if ($_SESSION['name'] == $row['FullName']){ # if current student is user
         # allow user to edit
-        $teamInfo .= '<td><a href = "overviewEdit.php?name='.$row['Fullname'] .'" target = "_self">Edit</a></td>'; 
+        $teamInfo .= '<td><a href = "overviewEdit.php?name='.$row['FullName'] .'" target = "_self">Edit</a></td>'; 
     } else {
         # only allow user to view
         # sending the monash email for view page
-        $teamInfo .= '<td><a href = "overviewView.php?name='.$row['Fullname'] .'&uid='. $current_monashId .'" target = "_self">View</a></td>'; 
+        $teamInfo .= '<td><a href = "overviewView.php?name='.$row['FullName'] .'&uid='. $current_monashId .'" target = "_self">View</a></td>'; 
     } 
     
     $teamInfo .= '</tr>';

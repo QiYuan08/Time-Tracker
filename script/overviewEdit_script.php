@@ -39,7 +39,7 @@ while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried fr
     }
 
     $taskInfo .= '<tr>
-                    <td><div contenteditable="false">' . $row['taskTitle']  . '</td> 
+                    <td><div contenteditable="false">' . $row['TaskTitle']  . '</td> 
                     <td><div contenteditable="false">' . $row['TimeSpent'] .'</td>' .
                     '<form action="script/updateCheckbox.php?tId='. $row['TaskID'] .'&name='. $name .'" method="post">  
                         <td><button name="isComplete" value="'. $value . '" style="border: 2px solid #14E10C">' . $value . '</button></td>

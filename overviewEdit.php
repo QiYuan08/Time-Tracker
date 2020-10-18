@@ -84,6 +84,39 @@
       </div>
     </main>
   </div>
+
+  <!-- popup Modal -->
+  <div id="popup1" class="overlay">
+    <div class="popup">
+      <h2 style="text-align:center">Input your task here</h2>
+      <a class="close" href="#">&times;</a>
+      <div class="content">
+      
+      <form action="script/addTask.php" method="post">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input name="task" class="mdl-textfield__input" type="text" id="sample3">
+            <label class="mdl-textfield__label" for="">task</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input name="timespent" class="mdl-textfield__input" type="number" id="sample3" min="0">
+            <label class="mdl-textfield__label" for="">Time Spend</label>
+          </div>
+          <br>
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+            <input name="isComplete" type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
+            <span class="mdl-checkbox__label">Completed</span>
+          </label>
+          <br>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name="save">Save</button>
+        </form>
+
+      
+      </div>
+    </div>
+  </div>
+
+  <div id="test"></div>
+
   <!-- <script src="scripts/shared.js" charset="utf-8"></script> -->
   <script src="scripts/overview.js"></script>
 </body>

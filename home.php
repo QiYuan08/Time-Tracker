@@ -57,7 +57,8 @@
                     <?php
                     require 'script/config.php';
                     if ($_SESSION['type'] == "Teacher"){
-                        $sql = "SELECT * FROM project";
+                        $teacherID = $_SESSION['id'];
+                        $sql = "SELECT * FROM project WHERE MonashID='$teacherID'";
                         $projects = mysqli_query($db, $sql);
                         $output = ' ';
                         while($row = $projects->fetch_assoc()) {
