@@ -22,7 +22,7 @@
         <span class="mdl-layout-title">Monash Time Tracker</span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Log out</a>
+          <a class="mdl-navigation__link" href="script/logout.php">Log out</a>
         </nav>
       </div>
     </header>

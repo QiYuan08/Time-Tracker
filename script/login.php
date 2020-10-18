@@ -27,7 +27,7 @@ if (isset($_POST['loginBtn'])) {
             $_SESSION['username'] = $username;
             $_SESSION['id'] = $row['MonashId'];
             $_SESSION['type'] = $row['type'];
-            $_SESSION['name'] = $row['Fullname'];
+            $_SESSION['name'] = $row['FullName'];
             
             # redirect user to homepage
             header("Location: ../home.php");

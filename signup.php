@@ -15,12 +15,15 @@
 		<?php
             if(isset($_GET['error'])){
                 if($_GET['error'] == "emptyfields"){
-                    echo "<p style='color:red;'> Fill in all fields! </p>";
+                    echo "<p> Fill in all fields! </p>";
                 } else if($_GET['error'] == "takenUsername"){
-                    echo "<p style='color:red;'> This username already exists in the system! </p>";
+                    echo "<p> This username already exists in the system! </p>";
                 } else if($_GET['error'] == "existingAcc"){
-                    echo "<p style='color:red;'> You already have an account! </p>";
+                    echo "<p> You already have an account! </p>";
                 }
+            } else if(isset($_GET["successful"])){
+				echo "<p> Signup Successfull! </p>";
+
             }
         ?>
 		<form action="script/registration.php" method="post" align="center">
@@ -60,12 +63,10 @@
 			</div>
 
 			<br>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name= "signup" value="Student" type="submit">
-				Sign up as a STUDENT
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="signup" value="Student" type="submit">
+				Sign up
 			</button>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name = "signup" value = "Teacher" type ="submit">
-				Sign up as a TEACHER
-			</button>
+			
 		</form>
 		<br>
 	</div>
