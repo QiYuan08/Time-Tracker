@@ -35,7 +35,7 @@
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="home.php">Home</a>
         <a class="mdl-navigation__link" href="overview.php">Overview</a>
-        <a class="mdl-navigation__link" href="visualisation.html">Visualisation</a>
+        <a class="mdl-navigation__link" href="taskSummary.php">Task Summary</a>
         <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
       </nav>
     </div>
@@ -60,7 +60,9 @@
                 <caption>Your Tasks</caption> <!-- or user's name -->
                 <tr>
                   <th>Tasks</th> <!-- fontsize is buggy -->
-                  <th>Time Spent (Hours)</th>
+                  <th>Task Description</th>
+                  <th>Estimated Time Spent</th>
+                  <th>Actual Time Spent (Hours)</th>
                   <th>Completed</th>
                   <th>Delete</th>
                 </tr>
@@ -99,13 +101,18 @@
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input name="timespent" class="mdl-textfield__input" type="number" id="sample3" min="0">
-            <label class="mdl-textfield__label" for="">Time Spend</label>
+            <label class="mdl-textfield__label" for="">description</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input name="timespent" class="mdl-textfield__input" type="number" id="sample3" min="0">
+            <label class="mdl-textfield__label" for="">estimated time spent</label>
           </div>
           <br>
           <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
             <input name="isComplete" type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
             <span class="mdl-checkbox__label">Completed</span>
           </label>
+          <br>
           <br>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name="save">Save</button>
         </form>
