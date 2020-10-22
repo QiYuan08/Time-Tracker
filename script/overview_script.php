@@ -16,6 +16,7 @@ $projectId = $_SESSION['ProjectID'];
 $teamId = NULL;
 $teamMembers = []; # array to store id for each team members
 $keepeye = "";
+$totalTask = NULL; # total task in a group
 
 # get info for this project from project table cuz already has the projectId in the url from home.php
 $sql = "SELECT * FROM project WHERE ProjectID='$projectId'";
@@ -47,15 +48,21 @@ $projectInfo = '<div id="studentSort">
                     '</h1>
                 </div>';
 
+                
 /*
     Displaying teamInfo on html
 */
 # query db to get studentId of every student in the team
 $sql = "SELECT * FROM teammembers WHERE TeamID='$teamId'";
 $result = mysqli_query($db, $sql);
-while ($row =mysqli_fetch_assoc($result)) {  # add all the studentID into an array
+while ($row =mysqli_fetch_assoc($result)) {  # add all the studentID in the team into an array
     array_push($teamMembers, $row['MonashID']);
 }
+
+# query db for the total number of task for this group
+$sql = "SELECT * FROM task WHERE TeamID='$teamId' AND ProjectID='$projectId'";
+$result = mysqli_query($db, $sql);
+$totalTask = mysqli_num_rows($result);
 
 # loop through every member in the team to find their respective task
 for ($i=0; $i < count($teamMembers); $i++){ 
@@ -63,6 +70,7 @@ for ($i=0; $i < count($teamMembers); $i++){
     # get current student monasId from teamMembers array
     $current_monashId = $teamMembers[$i];
     $totalHour = 0; # total hour worked by a student
+    $totalDone = 0; # task that is already done by a student
 
     # get task for all student in this team
     $sql = "SELECT * FROM task WHERE teamID='$teamId' AND ProjectID='$projectId' AND MonashID='$current_monashId'";
@@ -74,10 +82,19 @@ for ($i=0; $i < count($teamMembers); $i++){
        
         if ($row['MonashID'] == $current_monashId){ # if got that student in query 
             $totalHour += $row['TimeSpent'];
+
+            # if the task id done
+
+            if ($row['IsComplete'] == 1){
+                $totalDone += 1; 
+            }
         
         }
     }
 
+    # calculate percentage of work done by a student
+    # number of task completed/number of task in the whole group
+    $percentage_done = ($totalDone/$totalTask) * 100;
 
     # query the other information of the student from user table
     $sql = "SELECT * FROM user WHERE MonashId='$current_monashId'";
@@ -85,14 +102,15 @@ for ($i=0; $i < count($teamMembers); $i++){
     $row = mysqli_fetch_assoc($result);
     $teamInfo .= '<tr>
                     <td>' . $row['FullName']  . '</td> 
-                    <td>' . $totalHour .'</td>';
+                    <td>' . $totalHour .'</td>
+                    <td>' . $percentage_done  . '%</td>';
     
     if ($_SESSION['name'] == $row['FullName']){ # if current student is user
         # allow user to edit
         $teamInfo .= '<td><a href = "overviewEdit.php?name='.$row['FullName'] .'" target = "_self">Edit</a></td>'; 
     } else {
         # only allow user to view
-        # sending the monash email for view page
+        # sending the monash id for view page
         $teamInfo .= '<td><a href = "overviewView.php?name='.$row['FullName'] .'&uid='. $current_monashId .'" target = "_self">View</a></td>'; 
     } 
     

@@ -97,15 +97,16 @@
       <form action="script/addTask.php" method="post">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input name="task" class="mdl-textfield__input" type="text" id="sample3">
-            <label class="mdl-textfield__label" for="">task</label>
+            <label class="mdl-textfield__label" for="">Task</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input name="timespent" class="mdl-textfield__input" type="number" id="sample3" min="0">
-            <label class="mdl-textfield__label" for="">description</label>
+            <input name="desc" class="mdl-textfield__input" type="text" id="sample3">
+            <label class="mdl-textfield__label" for="">Description</label>
           </div>
+          <br>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input name="timespent" class="mdl-textfield__input" type="number" id="sample3" min="0">
-            <label class="mdl-textfield__label" for="">estimated time spent</label>
+            <label class="mdl-textfield__label" for="">Estimated time spent</label>
           </div>
           <br>
           <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">

@@ -17,14 +17,13 @@ $result = mysqli_query($db, $sql);
 # if this student has not done anything
 if (mysqli_num_rows($result) == 0){
     $taskInfo = '<tr>
-    <td colspan="4" style="text-align:center">You currently have no active task </td>
+    <td colspan="6" style="text-align:center">You currently have no active task </td>
                 </tr>';
 }
 
 # loop through every task for this member
 while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried from task table
 
-    $caption = '<caption>' . $name. ' Tasks (view Only)</caption>';
     # print each task
     # when user click on delete button they will be direction to deleteRow page with taskId
     # to delete the row in db and then redirect back to this page
@@ -40,6 +39,8 @@ while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried fr
 
     $taskInfo .= '<tr>
                     <td><div contenteditable="false">' . $row['TaskTitle']  . '</td> 
+                    <td><div contenteditable="false">' . $row['Note']  . '</td>
+                    <td><div contenteditable="false">' . $row['ETA']  . '</td>
                     <td><div contenteditable="false">' . $row['TimeSpent'] .'</td>' .
                     '<form action="script/updateCheckbox.php?tId='. $row['TaskID'] .'&name='. $name .'" method="post">  
                         <td><button name="isComplete" value="'. $value . '" style="border: 2px solid #14E10C">' . $value . '</button></td>
@@ -48,26 +49,8 @@ while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried fr
                   </tr>';
     
     $totalHour += $row['TimeSpent'];
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

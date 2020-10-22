@@ -26,18 +26,21 @@ $result = mysqli_query($db, $sql);
 # if this student has not done anything
 if (mysqli_num_rows($result) == 0){
     $taskInfo = '<tr>
-                    <td colspan="3" style="text-align:center">You currently have no active task </td>
+                    <td colspan="5" style="text-align:center">You currently have no active task </td>
                 </tr>';
 }
 
 # loop through every task for this member
 while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried from task table
 
-    $caption = '<caption>' . $name. ' Tasks (view Only)</caption>';
+    $caption = '<caption>' . $name. ' tasks (view Only)</caption>'; # caption of the table
+
     # print each task
     $taskInfo .= '<tr>
-                    <td>' . $row['Comment']  . '</td> 
+                    <td>' . $row['TaskTitle']  . '</td>
+                    <td>' . $row['Note']  . '</td> 
                     <td>' . $row['TimeSpent'] .'</td>
+                    <td>' . $row['ETA'] .'</td>
                     <td><input type="checkbox" disabled="disabled" checked="checked">
                     </tr>';
     

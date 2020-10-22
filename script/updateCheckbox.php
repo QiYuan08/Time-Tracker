@@ -16,6 +16,7 @@ if (isset($_POST['deleteBtn'])){
     } else if ($result == true) {
         header("Location: ../overviewEdit.php?name=" . $name); # send user back to overviewEdit.php
     }
+
 // when user click on save button 
 // update that row accordingly
 } else if (isset($_POST['isComplete'])){
@@ -31,12 +32,12 @@ if (isset($_POST['deleteBtn'])){
         $isComplete = 1;
     }
 
-    $sql = "UPDATE task WHERE TaskID='$taskId' SET IsComplete='$isComplete'";
+    $sql = "UPDATE task SET IsComplete='$isComplete' WHERE TaskID='$taskId'";
     $result = mysqli_query($db, $sql);
 
-    header("Location ../overviewEdit.php?name=".$name); # refresh the page
-    exit();
+    header("Location: ../overviewEdit.php?name=".$name, true); # refresh the page
+    echo 'WADAFAK';
 
 } else {
-    header("Location ../home.php?name=". $name); # refresh the page
+    header("Location: ../home.php?name=". $name); # refresh the page
 }
