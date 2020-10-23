@@ -1,4 +1,20 @@
 <!DOCTYPE html>
+<?php require 'script/config.php';
+session_start();?>
+<?php 
+    if(isset($_POST['submit'])) {
+        $comment = $_POST['comment'];
+        if(!empty($comment)){
+             $issueId = $_GET['select'];
+            echo "hi";
+            $teacherId = $_SESSION['id'];
+            $sql4 = "INSERT INTO comment (Comment, IssueId, MonashId, CommentId) VALUES ('$comment','$issueId','$teacherId', '')";
+            mysqli_query($db, $sql4);
+            header("Location: ./issueDescriptionTeacher.php?select=".$issueId); 
+            exit(); 
+        } 
+        
+    }?>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -35,7 +51,22 @@
         <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
       </nav>
     </div>
-
+    <?php
+    
+    $IssueId= intval($_GET['select']);
+    //extracting the data from SQLDatabase
+    $sql = "SELECT * FROM issue WHERE IssueId='$IssueId'";
+    $result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_assoc($result);  // fetch array that consist of data of current row
+    $student = $row["MonashId"];
+    $title = $row["Title"];
+    $Description = $row["Description"];
+    //extracting the teams
+    $sql2 = "SELECT * FROM user WHERE MonashId='$student'";
+    $result2 = mysqli_query($db, $sql2);
+    $studentInfo = mysqli_fetch_assoc($result2);
+    $studentName =$studentInfo["FullName"];
+    ?>
     <div id = "header">
       <h3>Team Issue</h3>
     </div>
@@ -46,21 +77,21 @@
           <div>
             <label for="issueTitle">Issue Title:</label>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="issueTitle">
+            <?php echo $title;?>
             </div>
           </div>
 
           <div>
             <label for="description">Description:</label>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="description">
+            <?php echo $Description;?>
             </div>
           </div>
 
           <div>
             <label for="name">Issue raised by:</label>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="name">
+            <?php echo $studentName; ?>
             </div>
           </div>
 
@@ -78,56 +109,35 @@
       <h5>Comments: </h5>
 
 <ul class="demo-list-three mdl-list">
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>Bryan Cranston</span>
-      <p>
-        Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-        for playing Hal in Malcom in the Middle.
-      </p>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span>Aaron Paul</span>
-      <p>
-        Aaron Paul played the role of Jesse in Breaking Bad. He also featured in
-        the "Need For Speed" Movie.
-      </p>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span>Bob Odenkirk</span>
-      <p>
-        Bob Odinkrik played the role of Saul in Breaking Bad. Due to public fondness for the
-        character, Bob stars in his own show now, called "Better Call Saul".
-      </p>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-    </span>
-  </li>
+<?php
+    $issueId = $_GET['select'];
+    $sql3 = "SELECT * FROM comment WHERE IssueId='$issueId'";
+    $result3 = mysqli_query($db, $sql3);
+    $output = ' ';
+    while($row= $result3->fetch_assoc()) {
+        $output .= '<li class="mdl-list__item mdl-list__item--three-line">';
+        $output .= '<span class="mdl-list__item-primary-content">';
+        $output .= '<i class="material-icons mdl-list__item-avatar">person</i>';
+        $output .=  "<span>$studentName</span>";
+        $output .= '<p>';
+        $output .= $row['Comment'];
+        $output .= "</p>";
+        $output .= '</span>';
+        $output .= '</li>';
+    }
+    echo $output;
+    ?>
 </ul>
-
-      <textarea id="w3review" name="w3review" rows="4" cols="120">
-        I want to complain something!
-      </textarea>
+    <form action="" method="post">
+      <textarea name="comment" rows="4" cols="120"></textarea>
       <br><br>
 
-      <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onclick = "window.location.href='issuesNReports.html' ">
+      <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" name="submit" ">
         Submit
       </button>
+    </form> 
 
+    
       </div>
     </div>
   </div>

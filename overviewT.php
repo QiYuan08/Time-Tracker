@@ -27,10 +27,10 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="home.php">Home</a>
-        <a class="mdl-navigation__link" href="overview.php">Overview</a>
-        <a class="mdl-navigation__link" href="taskSummary.php">Task Summary</a>
-        <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
+        <a class="mdl-navigation__link" href="home.php">Home</a>
+        <?php echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$_GET['teamID']}'>Overview</a>"; ?>
+        <?php echo "<a class='mdl-navigation__link' href=taskSummary.php?>Task Summary</a>"; ?>
+        <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>"; ?>
       </nav>
     </div>
 
@@ -80,7 +80,7 @@
                 <br>
                 <br>Team Name: <?php echo $teamInfo['TeamName']; ?>
                 <br>Team Members:
-                <form action="" method="post">
+                <form action="" method="get">
                   <?php
                   $sql4 = "SELECT * FROM teammembers WHERE TeamID='$teamId' ";
                   $result4= mysqli_query($db, $sql4);
@@ -119,11 +119,9 @@
               //known variables
               $current_Monashid = $_SESSION['id'];
               $current_TeamID = $_GET['teamID'];
-
-              if (empty($current_Monashid) || empty($current_TeamID)) {
+                if (empty($current_Monashid) || empty($current_TeamID)) {
                 exit('Key user data is empty. <br>Do NOT resubmit form data. The site requires data you entered earlier in order to be properly displayed.');
               }
-
               //obtaining tasks
               $sql_ProjectID = "SELECT ProjectID FROM teamlist WHERE TeamID='$current_TeamID'";
               $obj_ProjectID = mysqli_query($db, $sql_ProjectID);
@@ -174,15 +172,16 @@
                 <br>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name='addStudent' >Add Student</button>
               </div>
-            </form>
+            
           </div>
+          </form>
           <!-- code for adding a student-->
           <?php
-            if(isset($_POST['addStudent'])){
+            if(isset($_GET['addStudent'])){
                 header("Location: ../addStudent.php?teamID=".$_GET['teamID']);
                 exit();
-            }elseif(isset($_POST['delete'])){
-               $MonashId = $_POST['delete']; 
+            }elseif(isset($_GET['delete'])){
+               $MonashId = $_GET['delete']; 
                $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId'";
                $result5= mysqli_query($db, $sql5);
                header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
