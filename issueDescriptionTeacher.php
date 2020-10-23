@@ -115,10 +115,15 @@ session_start();?>
     $result3 = mysqli_query($db, $sql3);
     $output = ' ';
     while($row= $result3->fetch_assoc()) {
+        $commenter = $row['MonashId'];
+        $sql4 = "SELECT * FROM user WHERE MonashId='$commenter'";
+        $result4 = mysqli_query($db, $sql4);
+        $commenterInfo = mysqli_fetch_assoc($result4);
+        $name = $commenterInfo['FullName'];
         $output .= '<li class="mdl-list__item mdl-list__item--three-line">';
         $output .= '<span class="mdl-list__item-primary-content">';
         $output .= '<i class="material-icons mdl-list__item-avatar">person</i>';
-        $output .=  "<span>$studentName</span>";
+        $output .=  "<span>$name</span>";
         $output .= '<p>';
         $output .= $row['Comment'];
         $output .= "</p>";
