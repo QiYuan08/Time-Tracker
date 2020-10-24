@@ -42,16 +42,17 @@
             echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$_GET['teamID']}'>Overview</a>";
         } else if ($_SESSION['type'] == "Student"){
             $teamId = $_GET['teamID'];
+            $studentID = $_SESSION['id'];
             //extracting data from the database
             $sql = "SELECT * FROM teamlist WHERE TeamID='$teamId'";
             $result = mysqli_query($db, $sql);
             $row = mysqli_fetch_assoc($result);
-            $ProjectId = $row['ProjectID'];
-            echo "<a class='mdl-navigation__link' href='overview.php?select={$ProjectId}'>Overview</a>";
+            $project = $row['ProjectID'];
+            echo "<a class='mdl-navigation__link' href='overview.php?select={$project}'>Overview</a>";
         }?>
-        
         <?php echo "<a class='mdl-navigation__link' href=taskSummary.php>Task Summary</a>"; ?>
         <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>"; ?>
+        
       </nav>
     </div>
     <div class="page-content">
@@ -83,10 +84,12 @@
     </div>
    </div>
     <!-- Accent-colored raised button -->
+    <form action="" method="post">
     <?php
+        
             # show fab button only if user is teacher
         if ($_SESSION['type'] == "Student"){
-            echo '<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" name="report" href = "../addIssue.php?teamID={$_GET["teamID"]}">
+            echo '<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" name="report">
                 Report an issue
                 </button>
                 <div class="mdl-tooltip" data-mdl-for="report">
@@ -94,7 +97,13 @@
             </div>';
             }
         ?>
-    
+    </form> 
+    <?php
+     if(isset($_POST['report'])){
+        header("Location: ./addIssue.php?teamID=".$_GET['teamID']);
+        exit();
+     }
+    ?>
     </div>
   </div>
   </div>

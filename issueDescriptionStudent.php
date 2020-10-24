@@ -52,7 +52,7 @@ session_start();?>
         $result6 = mysqli_query($db, $sql6);
         $row6 = mysqli_fetch_assoc($result6); 
         $teamId = $row6['TeamId'];
-        echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$teamId}'>Overview</a>"; ?>
+        echo "<a class='mdl-navigation__link' href='overview.php?teamID={$teamId}'>Overview</a>"; ?>
         <?php echo "<a class='mdl-navigation__link' href=taskSummary.php>Task Summary</a>"; ?>
         <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$teamId}'>Issues and reports</a>"; ?>
       </nav>
@@ -94,13 +94,6 @@ session_start();?>
             </div>
           </div>
 
-          <div>
-            <label for="name">Issue raised by:</label>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <?php echo $studentName; ?>
-            </div>
-          </div>
-
         </div>
       <!-- Textfield for first and last name with Floating Label -->
 
@@ -118,16 +111,29 @@ session_start();?>
         $sql4 = "SELECT * FROM user WHERE MonashId='$commenter'";
         $result4 = mysqli_query($db, $sql4);
         $commenterInfo = mysqli_fetch_assoc($result4);
-        $name = $commenterInfo['FullName'];
-        $output .= '<li class="mdl-list__item mdl-list__item--three-line">';
-        $output .= '<span class="mdl-list__item-primary-content">';
-        $output .= '<i class="material-icons mdl-list__item-avatar">person</i>';
-        $output .=  "<span>$name</span>";
-        $output .= '<p>';
-        $output .= $row['Comment'];
-        $output .= "</p>";
-        $output .= '</span>';
-        $output .= '</li>';
+        if($commenterInfo['type']== "Student"){
+            $name = $commenterInfo['FullName'];
+            $output .= '<li class="mdl-list__item mdl-list__item--three-line">';
+            $output .= '<span class="mdl-list__item-primary-content">';
+            $output .= '<i class="material-icons mdl-list__item-avatar">person</i>';
+            $output .= '<p>';
+            $output .= $row['Comment'];
+            $output .= "</p>";
+            $output .= '</span>';
+            $output .= '</li>';
+        } else {
+            $name = $commenterInfo['FullName'];
+            $output .= '<li class="mdl-list__item mdl-list__item--three-line">';
+            $output .= '<span class="mdl-list__item-primary-content">';
+            $output .= '<i class="material-icons mdl-list__item-avatar">person</i>';
+            $output .=  "<span>$name</span>";
+            $output .= '<p>';
+            $output .= $row['Comment'];
+            $output .= "</p>";
+            $output .= '</span>';
+            $output .= '</li>';
+        }
+        
     }
     echo $output;
     ?>

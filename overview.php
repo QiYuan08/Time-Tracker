@@ -1,5 +1,7 @@
 <?php
-  require 'script/overview_script.php';
+    require 'script/overview_script.php';
+    session_start();# get the session variable
+    require 'script/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +36,18 @@
         <a class="mdl-navigation__link" href="home.php">Home</a>
         <a class="mdl-navigation__link" href="overview.php">Overview</a>
         <a class="mdl-navigation__link" href="taskSummary.php">Task Summary</a>
-        <a class="mdl-navigation__link" href="issuesNReports.php">Issues and Reports</a>
+        <?php
+        if ($_SESSION['type'] == "Student"){
+            $studentID = $_SESSION['id'];
+            $projectID = $_GET['select'];
+            //extracting data from the database
+            $sql = "SELECT * FROM teammembers WHERE ProjectID='$projectID' AND MonashID=$studentID";
+            $result = mysqli_query($db, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $teamID = $row['TeamID'];
+            echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$teamID}'>Issues and reports</a>"; 
+        }
+        ?>
       </nav>
     </div>
     
