@@ -27,9 +27,9 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="home.php">Home</a>
+         <a class="mdl-navigation__link" href="home.php">Home</a>
         <?php echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$_GET['teamID']}'>Overview</a>"; ?>
-        <?php echo "<a class='mdl-navigation__link' href=taskSummary.php?>Task Summary</a>"; ?>
+        <?php echo "<a class='mdl-navigation__link' href='taskSummary.php?teamID={$_GET['teamID']}'>Task Summary</a>"; ?>
         <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>"; ?>
       </nav>
     </div>
@@ -80,7 +80,7 @@
                 <br>
                 <br>Team Name: <?php echo $teamInfo['TeamName']; ?>
                 <br>Team Members:
-                <form action="" method="get">
+                <form action="" method="post">
                   <?php
                   $sql4 = "SELECT * FROM teammembers WHERE TeamID='$teamId' ";
                   $result4= mysqli_query($db, $sql4);
@@ -103,67 +103,16 @@
                   }
                   echo $output;
                   ?>
-                
-                
+
+
               </h1>
             </div>
           </div>
 
           <!-- Team Info -->
           <div class="mdl-cell mdl-cell--8-col" align="center">
-
-            <div id = 'outputArea'>
-              <?php
-              
-
-              //known variables
-              $current_Monashid = $_SESSION['id'];
-              $current_TeamID = $_GET['teamID'];
-                if (empty($current_Monashid) || empty($current_TeamID)) {
-                exit('Key user data is empty. <br>Do NOT resubmit form data. The site requires data you entered earlier in order to be properly displayed.');
-              }
-              //obtaining tasks
-              $sql_ProjectID = "SELECT ProjectID FROM teamlist WHERE TeamID='$current_TeamID'";
-              $obj_ProjectID = mysqli_query($db, $sql_ProjectID);
-              $current_ProjectID_fetch = mysqli_fetch_assoc($obj_ProjectID);
-              $current_ProjectID = $current_ProjectID_fetch['ProjectID'];
-
-              $sql_allTasks = "SELECT * FROM task WHERE ProjectID='$current_ProjectID' AND TeamID='$current_TeamID'";
-              $obj_allTasks = mysqli_query($db, $sql_allTasks);
-              $obj_allTasks_rows = mysqli_num_rows($obj_allTasks); //can be any numbers
-
-              //filtered data
-              //task table
-              $TaskName_from_task = "<table class='mdl-data-table mdl-js-data-table mdl-shadow--2dp' align='center'>";
-              $TaskName_from_task .= "<thead>";
-              $TaskName_from_task .= "<tr>";
-              $TaskName_from_task .= "<th>";  //1st th
-              $TaskName_from_task .= "<label class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select' for='table-header'>";
-              $TaskName_from_task .= "<input type='checkbox' id='table-header' class='mdl-checkbox__input' />";
-              $TaskName_from_task .= "</label>";
-              $TaskName_from_task .= "</th>";
-              $TaskName_from_task .= "<th class='mdl-data-table__cell--non-numeric'>Task</th>"; //2nd th
-              $TaskName_from_task .= "<th>Time to Spend</th>";  //3rd th
-              $TaskName_from_task .= "</tr>";
-              $TaskName_from_task .= "</thead>";
-              $TaskName_from_task .= "<tbody>";
-              //begin <tr> iteration
-              $iter = 0;
-              while($current_row = mysqli_fetch_assoc($obj_allTasks)) {
-                $iter += 1;
-                $TaskName_from_task .= "<tr>";
-                $TaskName_from_task .= "<td class='mdl-data-table__cell--non-numeric'><label class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select' for='row[" . $iter . "]'>"; //1st td
-                $TaskName_from_task .= "<md-checkbox type='checkbox' id='row[" . $iter . "]' class='mdl-checkbox__input' />";
-                $TaskName_from_task .= "</label></td>";
-                $TaskName_from_task .= "<td>" . $current_row['TaskTitle'] . "</td>";  //2nd td
-                $TaskName_from_task .= "<td>" . $current_row['IsComplete'] . "</td>"; //3rd td
-                $TaskName_from_task .= "</tr>";
-              }
-              $TaskName_from_task .= "</tbody>";
-              $TaskName_from_task .= "</table>";
-              echo $TaskName_from_task;
-              ?>
-            </div>
+            <!-- This is originally the table area. -->
+            <div id = 'outputArea'></div>
           </div>
 
           <!-- Edit Buttons -->
@@ -172,23 +121,23 @@
                 <br>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name='addStudent' >Add Student</button>
               </div>
-            
+            </form>
           </div>
-          </form>
           <!-- code for adding a student-->
           <?php
-            if(isset($_GET['addStudent'])){
+            if(isset($_POST['addStudent'])){
                 header("Location: ../addStudent.php?teamID=".$_GET['teamID']);
                 exit();
-            }elseif(isset($_GET['delete'])){
-               $MonashId = $_GET['delete']; 
-               $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId'";
-               $result5= mysqli_query($db, $sql5);
+            }elseif(isset($_POST['delete'])){
+               $MonashId = $_POST['delete'];
+               // delete teammember from sql
+               $sql_delete_teammember= "DELETE FROM teammembers WHERE MonashID='$MonashId'";
+               $delete_teammember_action= mysqli_query($db, $sql_delete_teammember);
                header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
                exit();
             }
             ?>
-          
+
         </div>
       </div>
     </main>
