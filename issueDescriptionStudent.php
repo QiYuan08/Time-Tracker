@@ -10,7 +10,7 @@ session_start();?>
             $teacherId = $_SESSION['id'];
             $sql4 = "INSERT INTO comment (Comment, IssueId, MonashId, CommentId) VALUES ('$comment','$issueId','$teacherId', '')";
             mysqli_query($db, $sql4);
-            header("Location: ./issueDescriptionTeacher.php?select=".$issueId); 
+            header("Location: ./issueDescriptionStudent.php?select=".$issueId); 
             exit(); 
         } 
         
