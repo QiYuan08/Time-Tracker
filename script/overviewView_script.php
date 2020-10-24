@@ -1,6 +1,4 @@
 <?php
-# TODO: find a way to calculate progress in overview page.
-# TODO: error checking for null query from db 
 /*
     This file is used to display project information and team information 
     of a user in the overview page
@@ -40,9 +38,17 @@ while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried fr
                     <td>' . $row['TaskTitle']  . '</td>
                     <td>' . $row['Note']  . '</td> 
                     <td>' . $row['TimeSpent'] .'</td>
-                    <td>' . $row['ETA'] .'</td>
-                    <td><input type="checkbox" disabled="disabled" checked="checked">
+                    <td>' . $row['ETA'] .'</td>';
+    
+    # the checkbox for completed/incomplete task
+    if ($row['IsComplete'] == 1){
+        $taskInfo .= '<td><input type="checkbox" disabled="disabled" checked="checked">
                     </tr>';
+    } else{
+        $taskInfo .= '<td><input type="checkbox" disabled="disabled">
+                    </tr>';
+    }
+                    
     
     $totalHour += $row['TimeSpent'];
 }

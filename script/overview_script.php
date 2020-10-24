@@ -94,7 +94,7 @@ for ($i=0; $i < count($teamMembers); $i++){
 
     # calculate percentage of work done by a student
     # number of task completed/number of task in the whole group
-    $percentage_done = ($totalDone/$totalTask) * 100;
+    $percentage_done = round(($totalDone/$totalTask) * 100);
 
     # query the other information of the student from user table
     $sql = "SELECT * FROM user WHERE MonashId='$current_monashId'";

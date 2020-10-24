@@ -75,10 +75,11 @@
             </div>
 
 <!-- Edit Buttons -->
-          <div class="mdl-cell mdl-cell--9-col">
-            <h2>Total hours spent: <?php echo $totalHour; ?> </h2> <!-- sums total hours(second column) -->
+          <div class="mdl-cell mdl-cell--9-col">            
+           <!-- <h2 id="totalHour">Total hours spent: <?php echo $totalHour; ?> </h2> sums total hours(second column) -->
+            <h2 id="totalHour">Total hours spent:  </h2> <!-- sums total hours(second column) -->
             <div id="button1">
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" href="#popup1">Add Task</a>                        
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" href="#popup1">Add Task</a>    
             </div>
           </div>
 
@@ -125,7 +126,47 @@
 
   <div id="test"></div>
 
-  <!-- <script src="scripts/shared.js" charset="utf-8"></script> -->
-  <script src="scripts/overview.js"></script>
+  <!-- script for event listener for time-->
+  <script type="text/javascript">
+
+    // add event listener to column in text
+    document.querySelectorAll('.time').forEach(item => {
+      item.addEventListener("input", function() {
+        var id = this.getAttribute('id');
+        var time = document.getElementById(id).innerText;
+        console.log(id, time);
+        to_updateTime(id, time);
+
+      })
+    })
+
+    function to_updateTime(taskID, time) {
+      var xhttp;
+      xhttp = new XMLHttpRequest(); // make a call to the server
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) { // when the server return ok
+          console.log('Task Updated');
+        }
+      };
+      xhttp.open("POST", "script/updateTime.php?tId="+taskID+"&t="+time, true);
+      xhttp.send();   
+    }
+
+    // check wif server to update totalHour every second
+    setInterval(function(){
+      var xhttp;
+      xhttp = new XMLHttpRequest(); // make a call to the server
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) { // when the server return ok
+          document.getElementById('totalHour').innerHTML = "Total time spent: " + this.responseText;
+        }
+      };
+      xhttp.open("POST", "script/updateTime.php", true);
+      xhttp.send();  
+      
+      }, 100);
+
+  </script>
+
 </body>
 </html>

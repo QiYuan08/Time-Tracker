@@ -8,7 +8,7 @@
   <title>Overview | Student</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css" />
-  <!-- <link rel="stylesheet" href="css/overview.css"> styles/overview.css -->
+  <link rel="stylesheet" href="css/overview.css"> <!-- styles/overview.css -->
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
@@ -34,7 +34,7 @@
         <a class="mdl-navigation__link" href="home.php">Home</a>
         <a class="mdl-navigation__link" href="overview.php">Overview</a>
         <a class="mdl-navigation__link" href="taskSummary.php">Task Summary</a>
-        <a class="mdl-navigation__link" href="issuesNReports.html">Issues and Reports</a>
+        <a class="mdl-navigation__link" href="issuesNReports.php">Issues and Reports</a>
       </nav>
     </div>
     
