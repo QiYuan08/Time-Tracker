@@ -98,6 +98,7 @@
               //begin <tr> iteration
               $iter = 0;
               while($current_row_task = mysqli_fetch_assoc($obj_allTasks)) {
+                // Prelimanary step 1) verify student name with id.
                 $current_student_name = null;
                 // figure out what is the current student name by searching in the array
                 for ($inner = 0; $inner < count($students_id_arr); $inner++) {
@@ -105,16 +106,25 @@
                         $current_student_name = $students_name_arr[$inner];
                     }
                 }
-                // Student can be non-existant, so that they are null sometimes. This should be avoided.
-                if ($current_student_name == null) {
-                    $current_student_name = "STUDENT NOT FOUND";
+                // Prelimanary step 2) change isComplete's boolean appereance.
+                $current_task_isComplete = $current_row_task['IsComplete'];
+                if ($current_task_isComplete == 1) {
+                    $current_task_isComplete = "Completed";
+                } else {
+                    $current_task_isComplete = "Incomplete";
                 }
-                $TaskName_from_task .= "<tr>";
-                $TaskName_from_task .= "<td class='mdl-data-table__cell--non-numeric'>" . $current_student_name . "</td>"; //1st td
-                $TaskName_from_task .= "<td>" . $current_row_task['TaskTitle'] . "</td>";  //2nd td
-                $TaskName_from_task .= "<td>" . $current_row_task['Note'] . "</td>"; //3rd td
-                $TaskName_from_task .= "<td>" . $current_row_task['IsComplete'] . "</td>"; //4th td
-                $TaskName_from_task .= "</tr>";
+                // Prelimanary step 3) see if the name assigned with the task exist in teammember table
+                // Student can be non-existant, so that they are null sometimes. This can happen as sometimes students may be removed from the group.
+                // This is designed in a way given that all of the task data is not removed from the mysql even when one teammember is removed from the group.
+                // This way, when the teammember is added back in, all task data can be restored back again.
+                if ($current_student_name != null) {
+                    $TaskName_from_task .= "<tr>";
+                    $TaskName_from_task .= "<td class='mdl-data-table__cell--non-numeric'>" . $current_student_name . "</td>"; //1st td
+                    $TaskName_from_task .= "<td>" . $current_row_task['TaskTitle'] . "</td>";  //2nd td
+                    $TaskName_from_task .= "<td>" . $current_row_task['Note'] . "</td>"; //3rd td
+                    $TaskName_from_task .= "<td>" . $current_task_isComplete . "</td>"; //4th td
+                    $TaskName_from_task .= "</tr>";
+                }
                 $iter += 1;
               }
               $TaskName_from_task .= "</tbody>";
