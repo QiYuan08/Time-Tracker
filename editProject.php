@@ -31,7 +31,7 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" id="logout" href="">Log out</a>
+        <a class="mdl-navigation__link" href="script/logout.php">Log out</a>
         <div class="mdl-tooltip" data-mdl-for="logout">
         Log out
         </div>
