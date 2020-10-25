@@ -1,5 +1,6 @@
 <?php
     require 'script/overview_script.php';
+    require 'script/config.php'
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +33,22 @@
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="home.php">Home</a>
-        <?php echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$_GET['teamID']}'>Overview</a>"; ?>
-        <?php echo "<a class='mdl-navigation__link' href='taskSummary.php?teamID={$_GET['teamID']}'>Task Summary</a>"; ?>
-        <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>"; ?>
+        <?php
+        if ($_SESSION['type'] == "Teacher"){
+            echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$_GET['teamID']}'>Overview</a>";
+        } else if ($_SESSION['type'] == "Student") {
+            $teamId = $_GET['teamID'];
+            $studentID = $_SESSION['id'];
+            //extracting data from the database
+            $sql = "SELECT * FROM teamlist WHERE TeamID='$teamId'";
+            $result = mysqli_query($db, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $project = $row['ProjectID'];
+            echo "<a class='mdl-navigation__link' href='overview.php?select={$project}'>Overview</a>";
+        }
+        echo "<a class='mdl-navigation__link' href='taskSummary.php?teamID={$_GET['teamID']}'>Task Summary</a>";
+        echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>";
+        ?>
       </nav>
     </div>
 
