@@ -14,7 +14,7 @@
   	<header class="mdl-layout__header">
   	<div class="mdl-layout__header-row">
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" id = "homeButton" href="home.html">Home</a>
+        <a class="mdl-navigation__link" id = "homeButton" href="home.php">Home</a>
       </nav>
       <div class="mdl-tooltip" data-mdl-for="homeButton">
       Back to home
@@ -67,12 +67,12 @@
     </div>
   </div>
 
-  <?php 
+  <?php
   if(isset($_POST['add'])){
     require 'script/config.php';
     $studentId= $_POST['studentId'];
     $teamID = $_GET['teamID'];
-    //getting the project ID 
+    //getting the project ID
     $sql = "SELECT * FROM teamlist WHERE TeamID='$teamID'";
     $result = mysqli_query($db, $sql);
     $row = mysqli_fetch_assoc($result);
@@ -82,12 +82,12 @@
         //sends the user to the page identified in the header in the html and ensures that the user doesn't need to fill the fields that were filled before
         exit(); //exits the code when the user doesn't fill out all the inputs
     } else {
-        //checks if student is in the system 
+        //checks if student is in the system
         $sql2 = "SELECT * FROM user WHERE MonashId='$studentId'";
         $result2 = mysqli_query($db, $sql2);
         $resultCheck = mysqli_num_rows($result2);
         if($resultCheck>0){
-            //getting all the teams with this student 
+            //getting all the teams with this student
             $sql3 = "SELECT * FROM teammembers WHERE MonashID='$studentId'";
             $result3 = mysqli_query($db, $sql3);
             while($row = $result3->fetch_assoc()) {
@@ -96,11 +96,11 @@
                 $result4 = mysqli_query($db, $sql4);
                 $comp = mysqli_fetch_assoc($result4);
                 if($comp['ProjectID'] == $ProjectID){
-                    header("Location: ./addStudent.php?error=exists&teamID=".$_GET['teamID']);
+                    header("Location: ../addStudent.php?error=exists&teamID=".$_GET['teamID']);
                     exit();
                 }
             }
-            //if the member is new to this project 
+            //if the member is new to this project
             // gets the name of the user from the user database
             $sql5 = "SELECT * FROM user WHERE MonashId='$studentId'";
             $result5 = mysqli_query($db, $sql5);
@@ -108,15 +108,15 @@
             $studentName = $studentInfo['FullName'];
             $sql6 = "INSERT INTO `teammembers`(MemID, ProjectID, TeamID, MonashID, Name) VALUES (' ', '$ProjectID', '$teamID','$studentId','$studentName')";
             $result6 = mysqli_query($db, $sql6);
-            header("Location: ./overviewT.php?teamID=".$_GET['teamID']);
+            header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
             exit();
         } else {
-            header("Location: ./addStudent.php?error=notFound&teamID=".$_GET['teamID']);
+            header("Location: ../addStudent.php?error=notFound&teamID=".$_GET['teamID']);
             exit();
         }
     }
   } elseif(isset($_POST['cancel'])){
-       header("Location: ./overviewT.php?teamID=".$_GET['teamID']);
+       header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
   }
   ?>
   </body>

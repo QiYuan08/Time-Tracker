@@ -1,9 +1,9 @@
 <?php
 session_start();
 # TODO: find a way to calculate progress in overview page.
-# TODO: error checking for null query from db 
+# TODO: error checking for null query from db
 /*
-    This file is used to display project information and team information 
+    This file is used to display project information and team information
     of a user in the overview page
 */
 require 'config.php'; # connect to db
@@ -28,6 +28,10 @@ $sql = "SELECT * FROM teammembers WHERE MonashId='$id' AND ProjectID='$projectId
 $result = mysqli_query($db, $sql);
 $member_row = mysqli_fetch_assoc($result);
 $teamId = $member_row['TeamID'];
+// if its still empty - meaning its on teacherside - use a different approach
+if ($teamId == NULL) {
+    $teamId = $_GET['teamID'];
+}
 
 # getting team name from teamList table
 $sql = "SELECT * FROM teamlist WHERE TeamID='$teamId' AND ProjectID='$projectId'";
@@ -48,7 +52,7 @@ $projectInfo = '<div id="studentSort">
                     '</h1>
                 </div>';
 
-                
+
 /*
     Displaying teamInfo on html
 */
@@ -67,10 +71,9 @@ if (mysqli_num_rows($result) == 0){
 } else{
     $totalTask = mysqli_num_rows($result);
 }
- 
 
 # loop through every member in the team to find their respective task
-for ($i=0; $i < count($teamMembers); $i++){ 
+for ($i=0; $i < count($teamMembers); $i++){
 
     # get current student monasId from teamMembers array
     $current_monashId = $teamMembers[$i];
@@ -84,16 +87,16 @@ for ($i=0; $i < count($teamMembers); $i++){
     # calculate total hour worked by student
     while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried from task table
 
-       
-        if ($row['MonashID'] == $current_monashId){ # if got that student in query 
+
+        if ($row['MonashID'] == $current_monashId){ # if got that student in query
             $totalHour += $row['TimeSpent'];
 
             # if the task id done
 
             if ($row['IsComplete'] == 1){
-                $totalDone += 1; 
+                $totalDone += 1;
             }
-        
+
         }
     }
 
@@ -106,19 +109,19 @@ for ($i=0; $i < count($teamMembers); $i++){
     $result = mysqli_query($db, $sql);
     $row = mysqli_fetch_assoc($result);
     $teamInfo .= '<tr>
-                    <td>' . $row['FullName']  . '</td> 
+                    <td>' . $row['FullName']  . '</td>
                     <td>' . $totalHour .'</td>
                     <td>' . $percentage_done  . '%</td>';
-    
+
     if ($_SESSION['name'] == $row['FullName']){ # if current student is user
         # allow user to edit
-        $teamInfo .= '<td><a href = "overviewEdit.php?name='.$row['FullName'] .'" target = "_self">Edit</a></td>'; 
+        $teamInfo .= '<td><a href = "overviewEdit.php?name='.$row['FullName'] .'" target = "_self">Edit</a></td>';
     } else {
         # only allow user to view
         # sending the monash id for view page
-        $teamInfo .= '<td><a href = "overviewView.php?name='.$row['FullName'] .'&uid='. $current_monashId .'" target = "_self">View</a></td>'; 
-    } 
-    
+        $teamInfo .= '<td><a href = "overviewView.php?name='.$row['FullName'] .'&uid='. $current_monashId .'" target = "_self">View</a></td>';
+    }
+
     $teamInfo .= '</tr>';
 
 }
