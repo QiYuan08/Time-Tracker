@@ -96,7 +96,7 @@
                 $result4 = mysqli_query($db, $sql4);
                 $comp = mysqli_fetch_assoc($result4);
                 if($comp['ProjectID'] == $ProjectID){
-                    header("Location: ../addStudent.php?error=exists&teamID=".$_GET['teamID']);
+                    header("Location: ./addStudent.php?error=exists&teamID=".$_GET['teamID']);
                     exit();
                 }
             }
@@ -108,15 +108,15 @@
             $studentName = $studentInfo['FullName'];
             $sql6 = "INSERT INTO `teammembers`(MemID, ProjectID, TeamID, MonashID, Name) VALUES (' ', '$ProjectID', '$teamID','$studentId','$studentName')";
             $result6 = mysqli_query($db, $sql6);
-            header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
+            header("Location: ./overviewT.php?teamID=".$_GET['teamID']);
             exit();
         } else {
-            header("Location: ../addStudent.php?error=notFound&teamID=".$_GET['teamID']);
+            header("Location: ./addStudent.php?error=notFound&teamID=".$_GET['teamID']);
             exit();
         }
     }
   } elseif(isset($_POST['cancel'])){
-       header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
+       header("Location: ./overviewT.php?teamID=".$_GET['teamID']);
   }
   ?>
   </body>

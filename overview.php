@@ -1,6 +1,5 @@
 <?php
     require 'script/overview_script.php';
-    session_start();# get the session variable
     require 'script/config.php';
 ?>
 
@@ -39,7 +38,7 @@
         <?php
         if ($_SESSION['type'] == "Student"){
             $studentID = $_SESSION['id'];
-            $projectID = $_GET['select'];
+            $projectID = $_SESSION['ProjectID'];
             //extracting data from the database
             $sql = "SELECT * FROM teammembers WHERE ProjectID='$projectID' AND MonashID=$studentID";
             $result = mysqli_query($db, $sql);
