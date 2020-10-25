@@ -22,7 +22,7 @@ while ($taskPerTeam_row = mysqli_fetch_assoc($obj_taskPerTeam)) {
         $completedTimePerTeam += $taskPerTeam_row['TimeSpent'];
     }
 }
-$taskPerTeamCompletionPercentage = completionPercentage($completedTimePerTeam/$totalTimePerTeam);
+$taskPerTeamCompletionPercentage = completionPercentage($completedTimePerTeam, $totalTimePerTeam);
 
 // calculate completion percentage of the teammember
 $totalTimePerMember = 0;
@@ -33,10 +33,16 @@ while ($taskPerMember_row = mysqli_fetch_assoc($obj_taskPerMember)) {
         $completedTimePerMember += $taskPerMember_row['TimeSpent'];
     }
 }
-$taskPerMemberCompletionPercentage = completionPercentage($completedTimePerMember/$totalTimePerMember);
+$taskPerMemberCompletionPercentage = completionPercentage($completedTimePerMember, $totalTimePerMember);
 
 // functions
-function completionPercentage(completedTimespan, totalTimespan) {
-    echo completedTimespan/totalTimespan;
+function completionPercentage($completedTimespan, $totalTimespan) {
+    if ($totalTimespan == 0 && $completedTimespan == 0) {
+        return 1;
+    } else if ($totalTimespan == 0 || $completedTimespan == 0) {
+        return 0;
+    } else {
+        return $completedTimespan/$totalTimespan;
+    }
 }
 ?>

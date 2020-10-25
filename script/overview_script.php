@@ -62,7 +62,12 @@ while ($row =mysqli_fetch_assoc($result)) {  # add all the studentID in the team
 # query db for the total number of task for this group
 $sql = "SELECT * FROM task WHERE TeamID='$teamId' AND ProjectID='$projectId'";
 $result = mysqli_query($db, $sql);
-$totalTask = mysqli_num_rows($result);
+if (mysqli_num_rows($result) == 0){
+    $totalTask = 1;
+} else{
+    $totalTask = mysqli_num_rows($result);
+}
+ 
 
 # loop through every member in the team to find their respective task
 for ($i=0; $i < count($teamMembers); $i++){ 

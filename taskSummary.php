@@ -52,14 +52,16 @@
 <!-- Team Info -->
           <div id = outputArea>
             <table id = "studentTaskSummary" class="mdl-data-table mdl-js-data-table mdl-data-table--2dp">
-              <tr>
+              <tr style="background-color:DeepSkyBlue" font-weight="bold">
                 <td>Task assigned to</td> <!-- student's name  -->
                 <td>Task</td> <!-- student's task/tasks  -->
                 <td>Task Description</td> <!-- description  -->
+                <td>Est. Worktime</td> <!-- ETA  -->
                 <td>Task Completion</td> <!-- checkbox  -->
               </tr>
               <?php
               require 'script/config.php';
+              require 'script/taskCompletionData.php';
               //known variables
               $current_Monashid = $_SESSION['id'];
               $current_TeamID = $_GET['teamID'];
@@ -70,7 +72,7 @@
 
               //obtaining tasks
               // 1) SOLELY GETTING THE PROJECT ID
-              /* test **/ echo $current_Monashid; echo $current_TeamID;
+              // /* test **/ echo $current_Monashid; echo $current_TeamID;
               $sql_ProjectID = "SELECT ProjectID FROM teamlist WHERE TeamID='$current_TeamID'";
               $obj_ProjectID = mysqli_query($db, $sql_ProjectID);
               $current_ProjectID_fetch = mysqli_fetch_assoc($obj_ProjectID);
@@ -122,13 +124,15 @@
                     $TaskName_from_task .= "<td class='mdl-data-table__cell--non-numeric'>" . $current_student_name . "</td>"; //1st td
                     $TaskName_from_task .= "<td>" . $current_row_task['TaskTitle'] . "</td>";  //2nd td
                     $TaskName_from_task .= "<td>" . $current_row_task['Note'] . "</td>"; //3rd td
-                    $TaskName_from_task .= "<td>" . $current_task_isComplete . "</td>"; //4th td
+                    $TaskName_from_task .= "<td>" . $current_row_task['TimeSpent'] . "</td>"; //4th td
+                    $TaskName_from_task .= "<td>" . $current_task_isComplete . "</td>"; //5th td
                     $TaskName_from_task .= "</tr>";
                 }
                 $iter += 1;
               }
               $TaskName_from_task .= "</tbody>";
               echo $TaskName_from_task;
+              echo '<p style="color:white"><b>Total task completion: ' . $taskPerTeamCompletionPercentage*100 . '%</b></p>';
               ?>
             </table>
           </div>
