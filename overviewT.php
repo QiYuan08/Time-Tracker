@@ -126,14 +126,21 @@
           <!-- code for adding a student-->
           <?php
             if(isset($_POST['addStudent'])){
-                header("Location: ../addStudent.php?teamID=".$_GET['teamID']);
+                header("Location: ./addStudent.php?teamID=".$_GET['teamID']);
                 exit();
             }elseif(isset($_POST['delete'])){
+
                $MonashId = $_POST['delete'];
-               // delete teammember from sql
-               $sql_delete_teammember= "DELETE FROM teammembers WHERE MonashID='$MonashId'";
-               $delete_teammember_action= mysqli_query($db, $sql_delete_teammember);
-               header("Location: ../overviewT.php?teamID=".$_GET['teamID']);
+               $sql5= "DELETE FROM teammembers WHERE MonashID='$MonashId'";
+               $result5= mysqli_query($db, $sql5);
+              
+               $teamID = $_GET['teamID'];
+               echo $MonashId;
+               echo $teamID;
+               $sql6= "DELETE FROM task WHERE MonashID='$MonashId' AND TeamID='$teamID'";
+               mysqli_query($db, $sql6);
+               
+               header("Location: ./overviewT.php?teamID=".$teamID);
                exit();
             }
             ?>
