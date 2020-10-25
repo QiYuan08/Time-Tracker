@@ -35,7 +35,7 @@
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="home.php">Home</a>
         <a class="mdl-navigation__link" href="overview.php">Overview</a>
-        <a class="mdl-navigation__link" href="taskSummary.php">Task Summary</a>
+        
         <?php
         if ($_SESSION['type'] == "Student"){
             $studentID = $_SESSION['id'];
@@ -45,6 +45,7 @@
             $result = mysqli_query($db, $sql);
             $row = mysqli_fetch_assoc($result);
             $teamID = $row['TeamID'];
+            echo "<a class='mdl-navigation__link' href='taskSummary.php?teamID={$teamID}'>Task Summary</a>";
             echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$teamID}'>Issues and reports</a>"; 
         }
         ?>
