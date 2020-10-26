@@ -53,7 +53,7 @@ session_start();?>
         $row6 = mysqli_fetch_assoc($result6);
         $teamId = $row6['TeamId'];
         echo "<a class='mdl-navigation__link' href='overview.php?teamID={$teamId}'>Overview</a>"; ?>
-        <?php echo "<a class='mdl-navigation__link' href=taskSummary.php>Task Summary</a>"; ?>
+        <?php echo "<a class='mdl-navigation__link' href=taskSummary.php?teamID={$teamId}>Task Summary</a>"; ?>
         <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$teamId}'>Issues and reports</a>"; ?>
       </nav>
     </div>
