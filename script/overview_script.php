@@ -63,6 +63,14 @@ while ($row =mysqli_fetch_assoc($result)) {  # add all the studentID in the team
     array_push($teamMembers, $row['MonashID']);
 }
 
+# query db for the total number of task for this group
+$sql = "SELECT * FROM task WHERE TeamID='$teamId' AND ProjectID='$projectId'";
+$result = mysqli_query($db, $sql);
+if (mysqli_num_rows($result) == 0){
+    $totalTask = 1;
+} else{
+    $totalTask = mysqli_num_rows($result);
+}
 
 # loop through every member in the team to find their respective task
 for ($i=0; $i < count($teamMembers); $i++){
@@ -71,16 +79,6 @@ for ($i=0; $i < count($teamMembers); $i++){
     $current_monashId = $teamMembers[$i];
     $totalHour = 0; # total hour worked by a student
     $totalDone = 0; # task that is already done by a student
-
-    # query db for the total number of task for this group
-    $sql = "SELECT * FROM task WHERE TeamID='$teamId' AND ProjectID='$projectId' AND MonashID='$current_monashId' ";
-    $result = mysqli_query($db, $sql);
-    if (mysqli_num_rows($result) == 0){
-        $totalTask = 1;
-    } else{
-        $totalTask = mysqli_num_rows($result);
-    }
-
 
     # get task for all student in this team
     $sql = "SELECT * FROM task WHERE teamID='$teamId' AND ProjectID='$projectId' AND MonashID='$current_monashId'";
