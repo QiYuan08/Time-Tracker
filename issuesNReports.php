@@ -58,6 +58,7 @@
     <div class="page-content">
         <div class="mdl-grid" id="">
             <form action="script/issueInfoDis.php" method="get">
+            <div class="mdl-grid" id="">
     <?php
     $teamId = $_GET['teamID'];
     $sql2 = "SELECT * FROM issue WHERE TeamId='$teamId'";
