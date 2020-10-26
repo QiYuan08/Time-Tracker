@@ -1,5 +1,6 @@
 <?php
     require 'script/overview_script.php';
+    require 'script/config.php'
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +33,22 @@
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="home.php">Home</a>
-        <?php echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$_GET['teamID']}'>Overview</a>"; ?>
-        <?php echo "<a class='mdl-navigation__link' href='taskSummary.php?teamID={$_GET['teamID']}'>Task Summary</a>"; ?>
-        <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>"; ?>
+        <?php
+        if ($_SESSION['type'] == "Teacher"){
+            echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$_GET['teamID']}'>Overview</a>";
+        } else if ($_SESSION['type'] == "Student") {
+            $teamId = $_GET['teamID'];
+            $studentID = $_SESSION['id'];
+            //extracting data from the database
+            $sql = "SELECT * FROM teamlist WHERE TeamID='$teamId'";
+            $result = mysqli_query($db, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $project = $row['ProjectID'];
+            echo "<a class='mdl-navigation__link' href='overview.php?select={$project}'>Overview</a>";
+        }
+        echo "<a class='mdl-navigation__link' href='taskSummary.php?teamID={$_GET['teamID']}'>Task Summary</a>";
+        echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>";
+        ?>
       </nav>
     </div>
 
@@ -132,7 +146,32 @@
               }
               $TaskName_from_task .= "</tbody>";
               echo $TaskName_from_task;
-              echo '<p style="color:white"><b>Total task completion: ' . $taskPerTeamCompletionPercentage*100 . '%</b></p>';
+
+              // Task Completion Data (modified from overview_script)
+              # get task for all student in this team
+              $sql = "SELECT * FROM task WHERE teamID='$current_TeamID' AND ProjectID='$current_ProjectID'";
+              $result = mysqli_query($db, $sql);
+
+              # calculate total hour worked by WHOLE TEAM
+              $totalTask = 0;
+              $totalDone = 0;
+              while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried from task table
+                  $totalTask += 1;
+                  if ($row['IsComplete'] == 1){
+                      $totalDone += 1;
+                  }
+              }
+              // Eliminate zero division error
+              $percentage_done = 0;
+              if ($totalTask == 0 && $totalDone == 0) {
+                  $percentage_done = 0;
+              } else if ($totalTask == 0) {
+                  $percentage_done = 100;
+              } else {
+                  $percentage_done = round(($totalDone/$totalTask) * 100);
+              }
+
+              echo '<p style="color:white"><b>Total task completion: ' . $percentage_done . '%</b></p>';
               ?>
             </table>
           </div>

@@ -50,9 +50,9 @@
             $project = $row['ProjectID'];
             echo "<a class='mdl-navigation__link' href='overview.php?select={$project}'>Overview</a>";
         }?>
-        <?php echo "<a class='mdl-navigation__link' href=taskSummary.php>Task Summary</a>"; ?>
+        <?php echo "<a class='mdl-navigation__link' href=taskSummary.php?teamID={$_GET['teamID']}>Task Summary</a>"; ?>
         <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>"; ?>
-        
+
       </nav>
     </div>
     <div class="page-content">
@@ -76,7 +76,6 @@
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</div>';
-        $output .= '</div>';
     }
     echo $output;
     ?>
@@ -86,7 +85,7 @@
     <!-- Accent-colored raised button -->
     <form action="" method="post">
     <?php
-        
+
             # show fab button only if user is teacher
         if ($_SESSION['type'] == "Student"){
             echo '<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" name="report">
@@ -97,7 +96,7 @@
             </div>';
             }
         ?>
-    </form> 
+    </form>
     <?php
      if(isset($_POST['report'])){
         header("Location: ./addIssue.php?teamID=".$_GET['teamID']);
@@ -109,4 +108,3 @@
   </div>
   </body>
 </html>
-

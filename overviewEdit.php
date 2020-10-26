@@ -35,17 +35,17 @@
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="home.php">Home</a>
         <a class="mdl-navigation__link" href="overview.php">Overview</a>
-        <a class="mdl-navigation__link" href="taskSummary.php">Task Summary</a>
         <?php
         if ($_SESSION['type'] == "Student"){
             $studentID = $_SESSION['id'];
-            $projectID = $_GET['select'];
+            $projectID = $_SESSION['ProjectID'];
             //extracting data from the database
             $sql = "SELECT * FROM teammembers WHERE ProjectID='$projectID' AND MonashID=$studentID";
             $result = mysqli_query($db, $sql);
             $row = mysqli_fetch_assoc($result);
             $teamID = $row['TeamID'];
-            echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$teamID}'>Issues and reports</a>"; 
+            echo "<a class='mdl-navigation__link' href='taskSummary.php?teamID={$teamID}'>Task Summary</a>";
+            echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID=".$teamID."'>Issues and reports</a>"; 
         }
         ?>
       </nav>
@@ -120,11 +120,6 @@
             <input name="timespent" class="mdl-textfield__input" type="number" id="sample3" min="0">
             <label class="mdl-textfield__label" for="">Estimated time spent</label>
           </div>
-          <br>
-          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-            <input name="isComplete" type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
-            <span class="mdl-checkbox__label">Completed</span>
-          </label>
           <br>
           <br>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" name="save">Save</button>
