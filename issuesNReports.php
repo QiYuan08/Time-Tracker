@@ -56,7 +56,6 @@
       </nav>
     </div>
     <div class="page-content">
-        <div class="mdl-grid" id="">
             <form action="script/issueInfoDis.php" method="get">
             <div class="mdl-grid" id="">
     <?php
