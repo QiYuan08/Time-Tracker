@@ -3,7 +3,7 @@
 if (!empty($_POST["signup"])){
 
     // connect to db
-    require 'config.php';
+    require './config.php';
 
    //List of the variables inputted by the user 
    $FullName =$_POST["FullName"];
@@ -37,7 +37,7 @@ if (!empty($_POST["signup"])){
         } else {
         //updating the database 
             $type = $_POST["signup"];
-            $sql = "INSERT INTO user (Id, FullName, Username, MonashId, Password, Email, Type) VALUES (' ','$FullName','$Username','$MonashId','$Password','$Email','$type')";
+            $sql = "INSERT INTO user (FullName, Username, MonashId, Password, Email, type) VALUES ('$FullName','$Username','$MonashId','$Password','$Email','$type')";
             mysqli_query($db, $sql);
             header("Location: ../index.php"); //ends the process for registering 
             exit(); //exits the code 

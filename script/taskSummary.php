@@ -147,30 +147,27 @@
               $TaskName_from_task .= "</tbody>";
               echo $TaskName_from_task;
 
-              // Task Completion Data (modified from overview_script)
+              // Task Completion Data (from overview_script)
               # get task for all student in this team
-              $sql = "SELECT * FROM task WHERE teamID='$current_TeamID' AND ProjectID='$current_ProjectID'";
+              $sql = "SELECT * FROM task WHERE teamID='$teamId' AND ProjectID='$projectId' AND MonashID='$current_monashId'";
               $result = mysqli_query($db, $sql);
 
-              # calculate total hour worked by WHOLE TEAM
-              $totalTask = 0;
-              $totalDone = 0;
+              # calculate total hour worked by student
               while($row = mysqli_fetch_assoc($result) ) { # loop through every row queried from task table
-                  $totalTask += 1;
-                  if ($row['IsComplete'] == 1){
-                      $totalDone += 1;
+
+
+                  if ($row['MonashID'] == $current_monashId){ # if got that student in query
+                      $totalHour += $row['TimeSpent'];
+
+                      # if the task id done
+
+                      if ($row['IsComplete'] == 1){
+                          $totalDone += 1;
+                      }
+
                   }
               }
-              // Eliminate zero division error
-              $percentage_done = 0;
-              if ($totalTask == 0 && $totalDone == 0) {
-                  $percentage_done = 0;
-              } else if ($totalTask == 0) {
-                  $percentage_done = 100;
-              } else {
-                  $percentage_done = round(($totalDone/$totalTask) * 100);
-              }
-
+              $percentage_done = round(($totalDone/$totalTask) * 100);
               echo '<p style="color:white"><b>Total task completion: ' . $percentage_done . '%</b></p>';
               ?>
             </table>

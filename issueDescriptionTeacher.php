@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php require 'script/config.php';
 session_start();?>
-<?php
+<?php 
     if(isset($_POST['submit'])) {
         $comment = $_POST['comment'];
         if(!empty($comment)){
@@ -10,10 +10,10 @@ session_start();?>
             $teacherId = $_SESSION['id'];
             $sql4 = "INSERT INTO comment (Comment, IssueId, MonashId, CommentId) VALUES ('$comment','$issueId','$teacherId', '')";
             mysqli_query($db, $sql4);
-            header("Location: ./issueDescriptionTeacher.php?select=".$issueId);
-            exit();
-        }
-
+            header("Location: ./issueDescriptionTeacher.php?select=".$issueId); 
+            exit(); 
+        } 
+        
     }?>
 <html>
   <head>
@@ -46,11 +46,11 @@ session_start();?>
       <span class="mdl-layout-title">Navigation Menu</span>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="home.php">Home</a>
-        <?php
+        <?php 
         $IssueId= intval($_GET['select']);
         $sql6 = "SELECT * FROM issue WHERE IssueId='$IssueId'";
         $result6 = mysqli_query($db, $sql6);
-        $row6 = mysqli_fetch_assoc($result6);
+        $row6 = mysqli_fetch_assoc($result6); 
         $teamId = $row6['TeamId'];
         echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$teamId}'>Overview</a>"; ?>
         <?php echo "<a class='mdl-navigation__link' href=taskSummary.php?teamID={$teamId}>Task Summary</a>"; ?>
@@ -58,7 +58,7 @@ session_start();?>
       </nav>
     </div>
     <?php
-
+    
     $IssueId= intval($_GET['select']);
     //extracting the data from SQLDatabase
     $sql = "SELECT * FROM issue WHERE IssueId='$IssueId'";
@@ -90,7 +90,7 @@ session_start();?>
           <div>
             <label for="description">Description:</label>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <span><?php echo $Description;?></span>
+            <p><?php echo $Description;?></p>
             </div>
           </div>
 
@@ -139,9 +139,9 @@ session_start();?>
       <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" name="submit" ">
         Submit
       </button>
-    </form>
+    </form> 
 
-
+    
       </div>
     </div>
   </div>

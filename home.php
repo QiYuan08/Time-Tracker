@@ -80,25 +80,29 @@
                         $sql = "SELECT * FROM teammembers WHERE MonashID=".$_SESSION['id']. "";
                         $project = mysqli_query($db, $sql);
                         $output = ' ';
-                        while($row = $project->fetch_assoc()) {
-                            $projectID = $row['ProjectID'];
-                            $sql = "SELECT  * FROM project WHERE ProjectID='$projectID'";
-                            $result = mysqli_query($db, $sql);
-                            $innerRow = mysqli_fetch_assoc($result);
+                        if (mysqli_num_rows($project) == 0){
+                            $output .= '<h2>You currently have not project</h2>';
+                        } else{
+                            while($row = $project->fetch_assoc()) {
+                                $projectID = $row['ProjectID'];
+                                $sql = "SELECT  * FROM project WHERE ProjectID='$projectID'";
+                                $result = mysqli_query($db, $sql);
+                                $innerRow = mysqli_fetch_assoc($result);
 
-                            $output .= '<div class="mdl-cell mdl-cell--4-col">';
-                            $output .= '<div class="mdl-card mdl-shadow--2dp project">';
-                            $output .= '<div class="mdl-card__title mdl-card--expand">';
-                            $output .=  "<h3>{$innerRow['unitCode']}</h3>";
-                            $output .= "<p> {$innerRow['Name']}</p>";
-                            $output .= '</div>';
-                            $output .= '<div class="mdl-card__actions mdl-card--border" >';
-                            $output .= "<button class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' value={$innerRow['ProjectID']} name='select' id='select'>";
-                            $output .= 'Select';
-                            $output .= '</button>';
-                            $output .= '</div>';
-                            $output .= '</div>';
-                            $output .= '</div>';
+                                $output .= '<div class="mdl-cell mdl-cell--4-col">';
+                                $output .= '<div class="mdl-card mdl-shadow--2dp project">';
+                                $output .= '<div class="mdl-card__title mdl-card--expand">';
+                                $output .=  "<h3>{$innerRow['unitCode']}</h3>";
+                                $output .= "<p> {$innerRow['Name']}</p>";
+                                $output .= '</div>';
+                                $output .= '<div class="mdl-card__actions mdl-card--border" >';
+                                $output .= "<button class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' value={$innerRow['ProjectID']} name='select' id='select'>";
+                                $output .= 'Select';
+                                $output .= '</button>';
+                                $output .= '</div>';
+                                $output .= '</div>';
+                                $output .= '</div>';
+                            }
                         } 
                     }
                     echo $output;

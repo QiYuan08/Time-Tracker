@@ -35,12 +35,12 @@
 
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Navigation Menu</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="home.php">Home</a>
-        <?php
-        if ($_SESSION['type'] == "Teacher"){
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="home.php">Home</a>
+          <?php
+          if ($_SESSION['type'] == "Teacher"){
             echo "<a class='mdl-navigation__link' href='overviewT.php?teamID={$_GET['teamID']}'>Overview</a>";
-        } else if ($_SESSION['type'] == "Student"){
+          } else if ($_SESSION['type'] == "Student"){
             $teamId = $_GET['teamID'];
             $studentID = $_SESSION['id'];
             //extracting data from the database
@@ -49,13 +49,14 @@
             $row = mysqli_fetch_assoc($result);
             $project = $row['ProjectID'];
             echo "<a class='mdl-navigation__link' href='overview.php?select={$project}'>Overview</a>";
-        }?>
-        <?php echo "<a class='mdl-navigation__link' href=taskSummary.php?teamID={$_GET['teamID']}>Task Summary</a>"; ?>
-        <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>"; ?>
+          }?>
+          <?php echo "<a class='mdl-navigation__link' href=taskSummary.php?teamID={$_GET['teamID']}>Task Summary</a>"; ?>
+          <?php echo "<a class='mdl-navigation__link' href='issuesNReports.php?teamID={$_GET['teamID']}'>Issues and reports</a>"; ?>
 
-      </nav>
+        </nav>
     </div>
     <div class="page-content">
+        
             <form action="script/issueInfoDis.php" method="get">
             <div class="mdl-grid" id="">
     <?php

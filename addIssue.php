@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php
+<?php 
 session_start();
 ?>
 <html>
@@ -75,10 +75,10 @@ session_start();
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"  name ="report"">
         Report
       </button>
-      </form>
+      </form> 
       </div>
       <?php
-
+    
     if(isset($_POST["report"])){
     // connect to db
         require 'script/config.php';
@@ -102,7 +102,7 @@ session_start();
     } elseif(isset($_POST["cancel"])){
         header("Location: ./issuesNReports.php?teamID=".$TeamId);
         exit();
-    }
+    } 
     ?>
     </div>
   </div>
